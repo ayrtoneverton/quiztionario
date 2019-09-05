@@ -7,22 +7,28 @@ import java.util.Arrays;
 import java.util.List;
 
 public class UserDAO {
-	private static int currentId = 0;
-	private static List<User> users = new ArrayList<User>(){{
+	private static UserDAO dao = new UserDAO();
+	private int currentId = 0;
+	private List<User> users = new ArrayList<User>(){{
 		add(new User("Admin","admin","admin"));
 	}};
 
-	public static User create(User user) {
+	private UserDAO() {}
+
+	public User create(User user) {
 		user.setId(currentId++);
 		users.add(user);
 		return user;
 	}
 
-	public static User login(String email, String password) {
+	public User login(String email, String password) {
 		for (User u: users) {
 			if (u.getEmail().equals(email) && u.getPassword().equals(password))
 				return u;
 		}
 		return null;
+	}
+	public static UserDAO getInstance() {
+		return dao;
 	}
 }

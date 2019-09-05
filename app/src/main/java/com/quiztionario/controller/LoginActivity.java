@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.quiztionario.R;
 import com.quiztionario.model.User;
@@ -26,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
 	public void submit(View view) {
 		try {
-			User user = UserService.login(
+			User user = UserService.getInstance().login(
 				((EditText) findViewById(R.id.login_email)).getText().toString(),
 				((EditText) findViewById(R.id.login_password)).getText().toString()
 			);
@@ -48,9 +47,6 @@ public class LoginActivity extends AppCompatActivity {
 	}
 
 	private void showHome(User user) {
-		startActivity(
-			new Intent(this, HomeActivity.class)
-				.putExtra("user", user)
-		);
+		startActivity(new Intent(this, HomeActivity.class).putExtra("user", user));
 	}
 }

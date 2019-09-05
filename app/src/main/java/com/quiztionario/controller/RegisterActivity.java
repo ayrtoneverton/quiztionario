@@ -24,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 	public void register(View view) {
 		try {
-			User user = UserService.create(
+			User user = UserService.getInstance().create(
 				new User(
 					((EditText) findViewById(R.id.register_name)).getText().toString(),
 					((EditText) findViewById(R.id.register_email)).getText().toString(),
