@@ -1,50 +1,17 @@
 package com.quiztionario.model;
 
-import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
-public class Quiz
-{
+public class Quiz {
     private int id;
     private String name;
-    private Date start;
-    private Date end;
+    private GregorianCalendar start;
+    private GregorianCalendar end;
     private Category category;
     private User creator;
     private List<Answer> answers;
     private List<Question> questions;
-
-    public Quiz() {}
-
-    public Quiz(int id, String name, Date start, Date end, Category category, User creator)
-    {
-        this.id = id;
-        this.name = name;
-        this.start = start;
-        this.end = end;
-        this.category = category;
-        this.creator = creator;
-    }
-
-    public Quiz(int id, String name, Date start, Date end, Category category, User creator, List<Answer> answers, List<Question> questions)
-    {
-        this.id = id;
-        this.name = name;
-        this.start = start;
-        this.end = end;
-        this.category = category;
-        this.creator = creator;
-        this.answers = answers;
-        this.questions = questions;
-    }
-
-    public Quiz(int id, String name, Date start, Date end)
-    {
-        this.id = id;
-        this.name = name;
-        this.start = start;
-        this.end = end;
-    }
 
     public int getId()
     {
@@ -62,19 +29,19 @@ public class Quiz
     {
         this.name = name;
     }
-    public Date getStart()
+    public GregorianCalendar getStart()
     {
         return start;
     }
-    public void setStart(Date start)
+    public void setStart(GregorianCalendar start)
     {
         this.start = start;
     }
-    public Date getEnd()
+    public GregorianCalendar getEnd()
     {
         return end;
     }
-    public void setEnd(Date end)
+    public void setEnd(GregorianCalendar end)
     {
         this.end = end;
     }
@@ -110,5 +77,4 @@ public class Quiz
     {
         this.questions = questions;
     }
-
 }

@@ -9,7 +9,7 @@ public class UserService {
 
 	private UserService() {}
 
-	public User create(User user) {
+	public User create(User user) throws ValidationException {
 		if (user.getName() == null || user.getName().trim().isEmpty())
 			throw new ValidationException("Name is required");
 		if (user.getEmail() == null || user.getEmail().trim().isEmpty())
@@ -20,7 +20,7 @@ public class UserService {
 		return UserDAO.getInstance().create(user);
 	}
 
-	public User login(String email, String password) {
+	public User login(String email, String password) throws ValidationException {
 		if (email == null || email.trim().isEmpty())
 			throw new ValidationException("E-mail is required");
 		if (password == null || password.trim().isEmpty())

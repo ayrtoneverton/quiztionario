@@ -10,21 +10,36 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import com.quiztionario.R;
+import android.widget.Toast;
 
-public class NewQuizActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+import com.quiztionario.R;
+import com.quiztionario.model.Category;
+import com.quiztionario.model.Quiz;
+import com.quiztionario.model.ValidationException;
+import com.quiztionario.service.QuizService;
+
+public class NewQuizActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,
+		TimePickerDialog.OnTimeSetListener, AutoCompleteAdapter.OnSelectAutoComplete {
 
 	private int idViewDate;
 	private GregorianCalendar date;
+	private Quiz quiz;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_quiz);
 		setTitle("New Quiz");
+		quiz = new Quiz();
+		quiz.setCategory(new Category());
+
+		((AutoCompleteTextView) findViewById(R.id.quiz_category))
+				.setAdapter(new AutoCompleteAdapter(this, this));
 	}
 
 	@Override
@@ -52,6 +67,11 @@ public class NewQuizActivity extends AppCompatActivity implements DatePickerDial
 				);
 		date.set(GregorianCalendar.HOUR_OF_DAY, hourOfDay);
 		date.set(GregorianCalendar.MINUTE, minute);
+		if (idViewDate == R.id.quiz_view_start_date) {
+			quiz.setStart(date);
+		} else {
+			quiz.setEnd(date);
+		}
 	}
 
 	public void editDate(View view) {
@@ -71,7 +91,26 @@ public class NewQuizActivity extends AppCompatActivity implements DatePickerDial
 		}
 	}
 
-	public void submit(View view) {
+	@Override
+	public void onSelectAutoComplete(Category item) {
+		if (item == null) {
+			quiz.setCategory(new Category());
+		} else{
+			quiz.setCategory(item);
+		}
+	}
 
+	public void submit(View view) {
+		try {
+			if (quiz.getCategory().getId() == 0)
+				quiz.getCategory().setName(((EditText) findViewById(R.id.quiz_category)).getText().toString());
+			quiz.setName(((EditText) findViewById(R.id.quiz_name)).getText().toString());
+
+			QuizService.getInstance().create(quiz);
+			Toast.makeText(getApplicationContext(), "Quiz Created", Toast.LENGTH_LONG).show();
+			finish();
+		} catch (ValidationException msg) {
+			msg.show(this);
+		}
 	}
 }

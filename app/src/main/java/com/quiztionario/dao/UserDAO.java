@@ -3,7 +3,6 @@ package com.quiztionario.dao;
 import com.quiztionario.model.User;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class UserDAO {
@@ -16,7 +15,7 @@ public class UserDAO {
 	private UserDAO() {}
 
 	public User create(User user) {
-		user.setId(currentId++);
+		user.setId(++currentId);
 		users.add(user);
 		return user;
 	}
@@ -28,6 +27,7 @@ public class UserDAO {
 		}
 		return null;
 	}
+
 	public static UserDAO getInstance() {
 		return dao;
 	}

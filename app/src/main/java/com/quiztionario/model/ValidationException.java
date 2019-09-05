@@ -4,7 +4,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ValidationException extends RuntimeException {
+public class ValidationException extends Exception {
 	public ValidationException(String msg) {
 		super(msg);
 	}
