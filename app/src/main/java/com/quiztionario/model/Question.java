@@ -1,32 +1,18 @@
 package com.quiztionario.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Question
+public class Question implements Serializable
 {
     private int id;
     private String text;
     private Quiz quiz;
-    private List<Option> options;
+    private ArrayList<Option> options;
     private Option correct;
 
     public Question() {}
-
-    public Question(int id, String text, Quiz quiz)
-    {
-        this.id = id;
-        this.text = text;
-        this.quiz = quiz;
-    }
-
-    public Question(int id, String text, Quiz quiz, List<Option> options, Option correct)
-    {
-        this.id = id;
-        this.text = text;
-        this.quiz = quiz;
-        this.options = options;
-        this.correct = correct;
-    }
 
     public String getText()
     {
@@ -52,14 +38,8 @@ public class Question
     {
         this.quiz = quiz;
     }
-    public List<Option> getOptions()
-    {
-        return options;
-    }
-    public void setOptions(List<Option> options)
-    {
-        this.options = options;
-    }
+    public ArrayList<Option> getOptions() { return options; }
+    public void setOptions(ArrayList<Option> options) { this.options = options; }
     public Option getCorrect()
     {
         return correct;

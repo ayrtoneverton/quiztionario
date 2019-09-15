@@ -1,6 +1,10 @@
 package com.quiztionario.model;
 
-public class Option
+import android.text.Editable;
+
+import java.io.Serializable;
+
+public class Option implements Serializable
 {
     private int id;
     private String text;
@@ -8,17 +12,6 @@ public class Option
 
     public Option() {}
 
-    public Option(int id, String text)
-    {
-        this.id = id;
-        this.text = text;
-    }
-    public Option(int id, String text, Question question)
-    {
-        this.id = id;
-        this.text = text;
-        this.question = question;
-    }
 
     public int getId()
     {
@@ -32,10 +25,7 @@ public class Option
     {
         return text;
     }
-    public void setText(String text)
-    {
-        this.text = text;
-    }
+    public void setText(String text) { this.text = text; }
     public Question getQuestion()
     {
         return question;
