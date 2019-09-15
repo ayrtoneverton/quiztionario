@@ -1,5 +1,6 @@
 package com.quiztionario.controller;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ public class MyQuizAdapter extends BaseAdapter {
     @Override
     public long getItemId(int i) { return (long) i;}
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
         Quiz quiz = myQuizzesList.get(i);
@@ -45,18 +47,19 @@ public class MyQuizAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.id.setText(String.valueOf(quiz.getId()));
         holder.name.setText(quiz.getName());
+        holder.open.setText(quiz.isOpen() ? "Aberto" : "Fechado");
 
         return row;
     }
 
+
     class ViewHolder{
-        final TextView id;
+        final TextView open;
         final TextView name;
 
         ViewHolder(View view){
-            id = view.findViewById(R.id.txtId);
+            open = view.findViewById(R.id.txtOpen);
             name = view.findViewById(R.id.txtName);
         }
     }

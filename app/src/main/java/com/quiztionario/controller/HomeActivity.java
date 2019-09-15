@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 import com.quiztionario.R;
@@ -26,12 +29,21 @@ public class HomeActivity extends AppCompatActivity {
 		//setContentView(R.layout.activity_home);
 
 		user = (User) getIntent().getSerializableExtra("user");
-		List<Quiz> listQuizzes = QuizDAO.getInstance(this).findQuizByUser(user);
+		final List<Quiz> listQuizzes = QuizDAO.getInstance(this).findQuizByUser(user);
 
-		ListView listView = new ListView(this);
+		final ListView listView = new ListView(this);
 		listView.setAdapter(new MyQuizAdapter(this, listQuizzes));
 		setContentView(listView);
+
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+				String name = listQuizzes.get(i).getName();
+				Toast.makeText(getApplicationContext(), "Clicou no quiz:" + name, Toast.LENGTH_LONG).show();
+			}
+		});
 	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -39,6 +51,7 @@ public class HomeActivity extends AppCompatActivity {
 		inflater.inflate(R.menu.home_menu, menu);
 		return true;
 	}
+
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
