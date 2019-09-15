@@ -1,12 +1,15 @@
 package com.quiztionario.controller;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -111,9 +114,13 @@ public class NewQuizActivity extends AppCompatActivity implements DatePickerDial
 
 			QuizService.getInstance(this).create(quiz);
 			Toast.makeText(getApplicationContext(), "Quiz Created", Toast.LENGTH_LONG).show();
+			showAddQuestion();
 			finish();
 		} catch (ValidationException msg) {
 			msg.show(this);
 		}
+	}
+	public void showAddQuestion() {
+		startActivity(new Intent(this, AddQuestionQuizActivity.class).putExtra("Quiz", quiz));
 	}
 }

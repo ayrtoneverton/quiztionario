@@ -1,9 +1,10 @@
 package com.quiztionario.model;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class Quiz {
+public class Quiz implements Serializable {
     private long id;
     private String name;
     private boolean open;

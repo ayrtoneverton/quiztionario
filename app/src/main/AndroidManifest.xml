@@ -20,6 +20,8 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
+		<activity android:name=".controller.AddQuestionQuizActivity" />
+		<activity android:name=".controller.CreateQuestionActivity" />
 	</application>
 
 	<dist:module dist:instant="true" />
