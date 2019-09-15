@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
 	public void submit(View view) {
 		try {
-			User user = UserService.getInstance().login(
+			User user = UserService.getInstance(this).login(
 				((EditText) findViewById(R.id.login_email)).getText().toString(),
 				((EditText) findViewById(R.id.login_password)).getText().toString()
 			);

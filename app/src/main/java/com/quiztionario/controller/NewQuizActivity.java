@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.quiztionario.R;
 import com.quiztionario.model.Category;
 import com.quiztionario.model.Quiz;
+import com.quiztionario.model.User;
 import com.quiztionario.model.ValidationException;
 import com.quiztionario.service.QuizService;
 
@@ -37,6 +38,7 @@ public class NewQuizActivity extends AppCompatActivity implements DatePickerDial
 		setTitle("New Quiz");
 		quiz = new Quiz();
 		quiz.setCategory(new Category());
+		quiz.setCreator((User) getIntent().getSerializableExtra("user"));
 
 		((AutoCompleteTextView) findViewById(R.id.quiz_category))
 				.setAdapter(new AutoCompleteAdapter(this, this));
@@ -107,7 +109,7 @@ public class NewQuizActivity extends AppCompatActivity implements DatePickerDial
 				quiz.getCategory().setName(((EditText) findViewById(R.id.quiz_category)).getText().toString());
 			quiz.setName(((EditText) findViewById(R.id.quiz_name)).getText().toString());
 
-			QuizService.getInstance().create(quiz);
+			QuizService.getInstance(this).create(quiz);
 			Toast.makeText(getApplicationContext(), "Quiz Created", Toast.LENGTH_LONG).show();
 			finish();
 		} catch (ValidationException msg) {

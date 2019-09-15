@@ -3,10 +3,14 @@ package com.quiztionario.model;
 import java.io.Serializable;
 
 public class User implements Serializable {
-	private int id;
+	private long id;
 	private String name;
 	private String email;
 	private String password;
+
+	public User(long id) {
+		this.id = id;
+	}
 
 	public User(String name, String email, String password) {
 		this.name = name;
@@ -14,17 +18,17 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public User(int id, String name, String email, String password) {
+	public User(long id, String name, String email, String password) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getName() {

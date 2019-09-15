@@ -58,7 +58,7 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable, View
 			protected FilterResults performFiltering(CharSequence search) {
 				FilterResults filterResults = new FilterResults();
 				if (search != null && search.length() > 1) {
-					List<Category> result = CategoryService.getInstance().find(search.toString());
+					List<Category> result = CategoryService.getInstance(inflater.getContext()).find(search.toString());
 					filterResults.values = result;
 					filterResults.count = result.size();
 				}

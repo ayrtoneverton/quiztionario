@@ -1,35 +1,67 @@
 package com.quiztionario.dao;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.quiztionario.model.Category;
 import com.quiztionario.model.Quiz;
 import com.quiztionario.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuizDAO {
-	private static QuizDAO dao = new QuizDAO();
-	private int currentId = 0;
-	private List<Quiz> quizzes = new ArrayList<>();
+import static com.quiztionario.dao.DAO.*;
 
-	private QuizDAO() {}
+public class QuizDAO extends WithDAO {
+	private static QuizDAO quizDAO;
+
+	private QuizDAO(Context context) {
+		super(context);
+	}
 
 	public Quiz create(Quiz quiz) {
-		quiz.setId(++currentId);
-		quizzes.add(quiz);
+		SQLiteDatabase db = dao.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(QUIZ_NAME, quiz.getName());
+		values.put(QUIZ_OPEN, quiz.isOpen());
+		values.put(QUIZ_START, getDate(quiz.getStart()));
+		values.put(QUIZ_END, getDate(quiz.getEnd()));
+		values.put(QUIZ_CATEGORY, quiz.getCategory().getId());
+		values.put(QUIZ_USER, quiz.getCreator().getId());
+
+		quiz.setId(db.insert(QUIZ_TABLE, null, values));
 		return quiz;
 	}
 
-	public ArrayList<Quiz> findQuizByUser(User user){
-		ArrayList<Quiz> userQuiz = new ArrayList<>();
-		for(Quiz quiz: quizzes){
-			if (quiz.getCreator().equals(user)){
-				userQuiz.add(quiz);
-			}
+	public List<Quiz> findQuizByUser(User user) {
+		SQLiteDatabase db = dao.getReadableDatabase();
+		Cursor c = db.query(QUIZ_TABLE, null,
+				QUIZ_USER + " = ?",
+				new String[]{ String.valueOf(user.getId()) },
+				null, null, null);
+
+		List<Quiz> result = new ArrayList<>();
+		while(c.moveToNext()) {
+			result.add(new Quiz(
+					c.getLong(c.getColumnIndex(QUIZ_ID)),
+					c.getString(c.getColumnIndex(QUIZ_NAME)),
+					c.getInt(c.getColumnIndex(QUIZ_OPEN)) == 1,
+					getDate(c.getString(c.getColumnIndex(QUIZ_START))),
+					getDate(c.getString(c.getColumnIndex(QUIZ_END))),
+					new Category(c.getLong(c.getColumnIndex(QUIZ_CATEGORY))),
+					new User(c.getLong(c.getColumnIndex(QUIZ_USER)))
+			));
 		}
-		return userQuiz;
+		c.close();
+		return result;
 	}
 
-	public static QuizDAO getInstance() {
-		return dao;
+	public static QuizDAO getInstance(Context context) {
+		if(quizDAO == null)
+			quizDAO = new QuizDAO(context);
+		return quizDAO;
 	}
 }

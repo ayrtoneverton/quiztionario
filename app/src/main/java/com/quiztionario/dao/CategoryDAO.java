@@ -1,34 +1,55 @@
 package com.quiztionario.dao;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 import com.quiztionario.model.Category;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryDAO {
-	private static CategoryDAO dao = new CategoryDAO();
-	private int currentId = 0;
-	private List<Category> categories = new ArrayList<>();
+import static com.quiztionario.dao.DAO.*;
 
-	private CategoryDAO() {}
+public class CategoryDAO extends WithDAO {
+	private static CategoryDAO categoryDAO;
+
+	private CategoryDAO(Context context) {
+		super(context);
+	}
 
 	public Category create(Category category) {
-		category.setId(++currentId);
-		categories.add(category);
+		SQLiteDatabase db = dao.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(CATEGORY_NAME, category.getName());
+
+		category.setId(db.insert(CATEGORY_TABLE, null, values));
 		return category;
 	}
 
 	public List<Category> find(String find) {
-		String findLower = find.toLowerCase();
+		SQLiteDatabase db = dao.getReadableDatabase();
+		Cursor c = db.query(CATEGORY_TABLE, null,
+				"lower("+ CATEGORY_NAME + ") like '%'||lower(?)||'%'",
+				new String[]{ find },
+				null, null, null);
+
 		List<Category> result = new ArrayList<>();
-		for (Category c: categories) {
-			if (c.getName().toLowerCase().contains(findLower))
-				result.add(c);
+		while(c.moveToNext()) {
+			result.add(new Category(
+					c.getLong(c.getColumnIndex(CATEGORY_ID)),
+					c.getString(c.getColumnIndex(CATEGORY_NAME))
+			));
 		}
+		c.close();
 		return result;
 	}
 
-	public static CategoryDAO getInstance() {
-		return dao;
+	public static CategoryDAO getInstance(Context context) {
+		if(categoryDAO == null)
+			categoryDAO = new CategoryDAO(context);
+		return categoryDAO;
 	}
 }

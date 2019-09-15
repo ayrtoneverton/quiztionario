@@ -1,13 +1,20 @@
 package com.quiztionario.service;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+
 import com.quiztionario.dao.UserDAO;
 import com.quiztionario.model.User;
 import com.quiztionario.model.ValidationException;
+import com.quiztionario.model.WithContext;
 
-public class UserService {
-	private static UserService service = new UserService();
+public class UserService extends WithContext {
+	@SuppressLint("StaticFieldLeak")
+	private static UserService service;
 
-	private UserService() {}
+	private UserService(Context context) {
+		super(context);
+	}
 
 	public User create(User user) throws ValidationException {
 		if (user.getName() == null || user.getName().trim().isEmpty())
@@ -17,7 +24,7 @@ public class UserService {
 		if (user.getPassword() == null || user.getPassword().trim().isEmpty())
 			throw new ValidationException("Password is required");
 
-		return UserDAO.getInstance().create(user);
+		return UserDAO.getInstance(context).create(user);
 	}
 
 	public User login(String email, String password) throws ValidationException {
@@ -26,14 +33,16 @@ public class UserService {
 		if (password == null || password.trim().isEmpty())
 			throw new ValidationException("Password is required");
 
-		User user = UserDAO.getInstance().login(email, password);
+		User user = UserDAO.getInstance(context).login(email, password);
 
 		if (user == null)
 			throw new ValidationException("Invalid E-mail or Password");
 		return user;
 	}
 
-	public static UserService getInstance() {
+	public static UserService getInstance(Context context) {
+		if(service == null)
+			service = new UserService(context);
 		return service;
 	}
 }

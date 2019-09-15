@@ -4,8 +4,9 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Quiz {
-    private int id;
+    private long id;
     private String name;
+    private boolean open;
     private GregorianCalendar start;
     private GregorianCalendar end;
     private Category category;
@@ -13,11 +14,23 @@ public class Quiz {
     private List<Answer> answers;
     private List<Question> questions;
 
-    public int getId()
+    public Quiz() {}
+
+    public Quiz(long id, String name, boolean open, GregorianCalendar start, GregorianCalendar end, Category category, User creator) {
+        this.id = id;
+        this.name = name;
+        this.open = open;
+        this.start = start;
+        this.end = end;
+        this.category = category;
+        this.creator = creator;
+    }
+
+    public long getId()
     {
         return id;
     }
-    public void setId(int id)
+    public void setId(long id)
     {
         this.id = id;
     }
@@ -28,6 +41,12 @@ public class Quiz {
     public void setName(String name)
     {
         this.name = name;
+    }
+    public boolean isOpen() {
+        return open;
+    }
+    public void setOpen(boolean open) {
+        this.open = open;
     }
     public GregorianCalendar getStart()
     {
