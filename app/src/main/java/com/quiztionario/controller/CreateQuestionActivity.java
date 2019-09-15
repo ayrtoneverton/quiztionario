@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.View;
@@ -24,6 +25,7 @@ import com.quiztionario.model.ValidationException;
 import com.quiztionario.service.OptionService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CreateQuestionActivity extends AppCompatActivity {
 
@@ -40,6 +42,9 @@ public class CreateQuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_question);
 
+        quiz = (Quiz) getIntent().getSerializableExtra("Quiz");
+        Question question = new Question();
+
         options = new ArrayList<>();
         final ArrayList<String> optionText= new ArrayList<String>();
 
@@ -50,7 +55,8 @@ public class CreateQuestionActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), optionText.get(position), Toast.LENGTH_SHORT).show();
+                correctOption=optionText.get(position);
+
             }
         });
     }
@@ -67,9 +73,11 @@ public class CreateQuestionActivity extends AppCompatActivity {
                 option.setQuestion(question);
                 option.setText(input.getText().toString());
                 adapter.add(option.getText());
+                options.add(option);
                 try {
                     Option optionb = OptionService.getInstance().create(option);
                     options.add(optionb);
+                    adapter.add(option.getText());
 
                 } catch (ValidationException msg) {
                     msg.getMessage();
@@ -81,8 +89,24 @@ public class CreateQuestionActivity extends AppCompatActivity {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
-    public void createOption(){
 
+    public void saveQuestion(){
+        EditText editText = findViewById(R.id.QuestionName);
+        question.setText(editText.getText().toString());
+        Option correct = new Option();
+        for(Option a : options) {
+            if(a.getText().equals(correctOption)){
+                correct = a;
+            }
+        }
+        question.setCorrect(correct);
+        question.setOptions(options);
+        returnToAddQuestion();
     }
-    public void saveQuestion(){}
+    public void returnToAddQuestion(){
+        List<Question> a = quiz.getQuestions();
+        a.add(question);
+        quiz.setQuestions(a);
+        startActivity(new Intent(this, AddQuestionQuizActivity.class).putExtra("Quiz", quiz));
+    }
 }
