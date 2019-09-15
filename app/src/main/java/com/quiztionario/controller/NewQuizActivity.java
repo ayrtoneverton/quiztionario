@@ -101,6 +101,7 @@ public class NewQuizActivity extends AppCompatActivity implements DatePickerDial
 			quiz.setCategory(new Category());
 		} else{
 			quiz.setCategory(item);
+			((AutoCompleteTextView) findViewById(R.id.quiz_category)).setText(item.getName());
 		}
 	}
 

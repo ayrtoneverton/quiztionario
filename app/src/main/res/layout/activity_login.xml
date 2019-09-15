@@ -30,6 +30,7 @@
 				android:id="@+id/login_email"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:inputType="text|textEmailAddress"
 				android:hint="E-mail"
 				android:defaultFocusHighlightEnabled="true"
 				android:layout_marginBottom="25sp"/>
