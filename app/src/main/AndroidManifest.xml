@@ -13,6 +13,8 @@
 		<activity android:name=".controller.NewQuizActivity" />
 		<activity android:name=".controller.RegisterActivity"></activity>
 		<activity android:name=".controller.HomeActivity" />
+		<activity android:name=".controller.QuestionActivity" />
+		<activity android:name=".controller.AnswersActivity" />
 		<activity android:name=".controller.LoginActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />

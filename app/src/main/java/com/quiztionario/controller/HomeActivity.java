@@ -15,9 +15,11 @@ import android.widget.Toast;
 
 import com.quiztionario.R;
 import com.quiztionario.dao.QuizDAO;
+import com.quiztionario.model.Question;
 import com.quiztionario.model.Quiz;
 import com.quiztionario.model.User;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
@@ -38,8 +40,9 @@ public class HomeActivity extends AppCompatActivity {
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-				String name = listQuizzes.get(i).getName();
-				Toast.makeText(getApplicationContext(), "Clicou no quiz:" + name, Toast.LENGTH_LONG).show();
+				Quiz quiz = listQuizzes.get(i);
+				Toast.makeText(view.getContext(),quiz.getName(),Toast.LENGTH_SHORT).show();
+				startActivity(new Intent(view.getContext(), QuestionActivity.class).putExtra("quiz", quiz));
 			}
 		});
 	}
