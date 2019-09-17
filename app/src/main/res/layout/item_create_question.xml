@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:padding="10sp">
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+		<TextView
+			android:id="@+id/create_question_text"
+			android:layout_width="0sp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:layout_gravity="center"/>
+		<ImageButton
+			android:id="@+id/create_question_add_option"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:tooltipText="Add Option"
+			android:src="@android:drawable/ic_menu_add"/>
+		<ImageButton
+			android:id="@+id/create_question_remove"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:tooltipText="Remove Question"
+			android:src="@android:drawable/ic_menu_delete"/>
+	</LinearLayout>
+	<ListView
+		android:id="@+id/create_question_options"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:choiceMode="singleChoice"
+		android:clickable="true"
+		android:drawSelectorOnTop="true"/>
+</LinearLayout>

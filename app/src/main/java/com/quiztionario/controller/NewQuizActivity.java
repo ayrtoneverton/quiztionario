@@ -16,9 +16,9 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.quiztionario.R;
 import com.quiztionario.model.Category;
@@ -97,13 +97,17 @@ public class NewQuizActivity extends AppCompatActivity implements DatePickerDial
 	}
 
 	@Override
-	public void onSelectAutoComplete(Category item) {
-		if (item == null) {
+	public void onSelectAutoComplete(Category category) {
+		if (category == null) {
 			quiz.setCategory(new Category());
 		} else{
-			quiz.setCategory(item);
-			((AutoCompleteTextView) findViewById(R.id.quiz_category)).setText(item.getName());
+			quiz.setCategory(category);
+			((AutoCompleteTextView) findViewById(R.id.quiz_category)).setText(category.getName());
 		}
+	}
+
+	public void setOpen(View view) {
+		quiz.setOpen(((Switch) view).isChecked());
 	}
 
 	public void submit(View view) {
@@ -113,14 +117,17 @@ public class NewQuizActivity extends AppCompatActivity implements DatePickerDial
 			quiz.setName(((EditText) findViewById(R.id.quiz_name)).getText().toString());
 
 			QuizService.getInstance(this).create(quiz);
-			Toast.makeText(getApplicationContext(), "Quiz Created", Toast.LENGTH_LONG).show();
-			showAddQuestion();
-			finish();
+			startActivityForResult(new Intent(this, CreateQuestionsActivity.class).putExtra("quiz", quiz), 0);
 		} catch (ValidationException msg) {
 			msg.show(this);
 		}
 	}
-	public void showAddQuestion() {
-		startActivity(new Intent(this, AddQuestionQuizActivity.class).putExtra("Quiz", quiz));
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+		if (resultCode == Activity.RESULT_OK) {
+			setResult(resultCode, data);
+			finish();
+		}
 	}
 }

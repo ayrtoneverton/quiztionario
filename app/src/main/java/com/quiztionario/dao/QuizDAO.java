@@ -27,6 +27,7 @@ public class QuizDAO extends WithDAO {
 		ContentValues values = new ContentValues();
 		values.put(QUIZ_NAME, quiz.getName());
 		values.put(QUIZ_OPEN, quiz.isOpen());
+		values.put(QUIZ_CODE, quiz.getCode());
 		values.put(QUIZ_START, getDate(quiz.getStart()));
 		values.put(QUIZ_END, getDate(quiz.getEnd()));
 		values.put(QUIZ_CATEGORY, quiz.getCategory().getId());
@@ -49,6 +50,7 @@ public class QuizDAO extends WithDAO {
 					c.getLong(c.getColumnIndex(QUIZ_ID)),
 					c.getString(c.getColumnIndex(QUIZ_NAME)),
 					c.getInt(c.getColumnIndex(QUIZ_OPEN)) == 1,
+					c.getInt(c.getColumnIndex(QUIZ_CODE)),
 					getDate(c.getString(c.getColumnIndex(QUIZ_START))),
 					getDate(c.getString(c.getColumnIndex(QUIZ_END))),
 					new Category(c.getLong(c.getColumnIndex(QUIZ_CATEGORY))),

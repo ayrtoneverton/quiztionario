@@ -17,17 +17,24 @@ public class QuizService extends WithContext {
 	}
 
 	public Quiz create(Quiz quiz) throws ValidationException {
-		if (quiz.getName() == null || quiz.getName().trim().isEmpty())
-			throw new ValidationException("Quiz Name is required");
-		if (quiz.getStart() == null)
-			throw new ValidationException("Start Date is required");
-		if (quiz.getEnd() == null)
-			throw new ValidationException("End Date is required");
-		if (quiz.getCategory().getId() == 0) {
-			CategoryService.getInstance(context).create(quiz.getCategory());
-		}
+		if (quiz.getQuestions() == null) {
+			if (quiz.getName() == null || quiz.getName().trim().isEmpty())
+				throw new ValidationException("Quiz Name is required");
+			if (quiz.getStart() == null)
+				throw new ValidationException("Start Date is required");
+			if (quiz.getEnd() == null)
+				throw new ValidationException("End Date is required");
+			if (quiz.getCategory().getId() == 0)
+				quiz.setCategory(CategoryService.getInstance(context).create(quiz.getCategory()));
 
-		return QuizDAO.getInstance(context).create(quiz);
+			if (quiz.isOpen())
+				quiz.setCode(null);
+			else
+				quiz.setCode((int)(Math.random() * 99999 + 1));
+			return null;
+		} else {
+			return QuizDAO.getInstance(context).create(quiz);
+		}
 	}
 
 	public static QuizService getInstance(Context context) {

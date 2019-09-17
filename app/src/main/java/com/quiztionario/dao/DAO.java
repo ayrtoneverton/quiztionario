@@ -30,6 +30,7 @@ public class DAO extends SQLiteOpenHelper {
 	static final String QUIZ_ID = "id_quiz";
 	static final String QUIZ_NAME = "name";
 	static final String QUIZ_OPEN = "open";
+	static final String QUIZ_CODE = "code";
 	static final String QUIZ_START= "start_date";
 	static final String QUIZ_END = "end_date";
 	static final String QUIZ_CATEGORY = "id_category";
@@ -48,21 +49,22 @@ public class DAO extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL("CREATE TABLE " + USER_TABLE + "("
-				+ USER_ID + " INTEGER PRIMARY KEY,"
+				+ USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ USER_NAME + " TEXT,"
 				+ USER_EMAIL + " TEXT,"
 				+ USER_PASSWORD + " TEXT"
 				+ ")");
 
 		db.execSQL("CREATE TABLE " + CATEGORY_TABLE + "("
-				+ CATEGORY_ID + " INTEGER PRIMARY KEY,"
+				+ CATEGORY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ CATEGORY_NAME + " TEXT"
 				+ ")");
 
 		db.execSQL("CREATE TABLE " + QUIZ_TABLE + "("
-				+ QUIZ_ID + " INTEGER PRIMARY KEY,"
+				+ QUIZ_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ QUIZ_NAME + " TEXT,"
 				+ QUIZ_OPEN + " INTEGER,"
+				+ QUIZ_CODE + " INTEGER,"
 				+ QUIZ_START + " TEXT,"
 				+ QUIZ_END + " TEXT,"
 				+ QUIZ_CATEGORY + " INTEGER,"

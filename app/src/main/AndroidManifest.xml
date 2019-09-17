@@ -10,20 +10,18 @@
 		android:roundIcon="@mipmap/ic_launcher_round"
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
+		<activity android:name=".controller.CreateQuestionsActivity" />
 		<activity android:name=".controller.NewQuizActivity" />
-		<activity android:name=".controller.RegisterActivity"></activity>
+		<activity android:name=".controller.RegisterActivity" />
 		<activity android:name=".controller.HomeActivity" />
 		<activity android:name=".controller.QuestionActivity" />
 		<activity android:name=".controller.AnswersActivity" />
 		<activity android:name=".controller.LoginActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
-
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".controller.AddQuestionQuizActivity" />
-		<activity android:name=".controller.CreateQuestionActivity" />
 	</application>
 
 	<dist:module dist:instant="true" />

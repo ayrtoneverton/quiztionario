@@ -21,7 +21,7 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable, View
 	private LayoutInflater inflater;
 	private OnSelectAutoComplete selectItem;
 
-	public AutoCompleteAdapter(Context context, OnSelectAutoComplete selectItem){
+	AutoCompleteAdapter(Context context, OnSelectAutoComplete selectItem) {
 		this.inflater = LayoutInflater.from(context);
 		this.selectItem = selectItem;
 	}
@@ -84,7 +84,7 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable, View
 		selectItem.onSelectAutoComplete(list.get((Integer) view.getTag()));
 	}
 
-	public interface OnSelectAutoComplete{
+	interface OnSelectAutoComplete {
 		void onSelectAutoComplete(Category item);
 	}
 }

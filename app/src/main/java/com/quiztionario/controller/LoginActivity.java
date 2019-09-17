@@ -48,5 +48,6 @@ public class LoginActivity extends AppCompatActivity {
 
 	private void showHome(User user) {
 		startActivity(new Intent(this, HomeActivity.class).putExtra("user", user));
+		finish();
 	}
 }

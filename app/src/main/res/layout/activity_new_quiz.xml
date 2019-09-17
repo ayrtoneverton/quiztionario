@@ -20,6 +20,17 @@
             android:defaultFocusHighlightEnabled="true"
             android:layout_marginBottom="25sp"/>
 
+        <Switch
+            android:id="@+id/quiz_open"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18sp"
+            android:paddingHorizontal="4sp"
+            android:text="Public"
+            android:onClick="setOpen"
+            android:layout_marginBottom="25sp"/>
+
         <AutoCompleteTextView
             android:id="@+id/quiz_category"
             android:layout_width="match_parent"
@@ -71,7 +82,7 @@
             android:background="@color/colorPrimary"
             android:textColor="@android:color/background_light"
             android:layout_marginBottom="25sp"
-            android:text="Save"
+            android:text="Next Step"
             android:onClick="submit"/>
     </LinearLayout>
 </ScrollView>
