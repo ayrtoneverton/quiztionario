@@ -85,8 +85,11 @@ public class QuestionActivity extends AppCompatActivity {
                 for (Option j : listQ.get(i).getOptions()){
                     answers.add(j.getText());
                 }
-                startActivity(new Intent(view.getContext(), AnswersActivity.class).putExtra("question", listQ.get(i).getText()));
-                startActivity(new Intent(view.getContext(), AnswersActivity.class).putExtra("answers", (Serializable) answers));
+                Intent intent = new Intent(view.getContext(), AnswersActivity.class);
+                intent.putExtra("question", listQ.get(i).getText());
+                intent.putExtra("answers", (Serializable) answers);
+                startActivity(intent);
+
             }
         });
 
