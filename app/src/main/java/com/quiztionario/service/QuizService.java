@@ -31,6 +31,8 @@ public class QuizService extends WithContext {
 			quiz.setCode(quiz.isOpen() ? null : (int)(Math.random() * 99999 + 1));
 			return null;
 		} else {
+			if (quiz.getQuestions().size() == 0)
+				throw new ValidationException("At least one Question required");
 			QuizDAO.getInstance(context).beginTransaction();
 			try {
 				QuizDAO.getInstance(context).create(quiz);
