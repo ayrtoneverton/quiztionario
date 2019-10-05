@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Question implements Serializable {
-	private int id;
+	private long id;
 	private String text;
 	private Quiz quiz;
 	private ArrayList<Option> options;
@@ -25,11 +25,11 @@ public class Question implements Serializable {
 		this.text = text;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

@@ -37,7 +37,7 @@ public class CategoryDAO extends WithDAO {
 				null, null, null);
 
 		List<Category> result = new ArrayList<>();
-		while(c.moveToNext()) {
+		while (c.moveToNext()) {
 			result.add(new Category(
 					c.getLong(c.getColumnIndex(CATEGORY_ID)),
 					c.getString(c.getColumnIndex(CATEGORY_NAME))
@@ -48,7 +48,7 @@ public class CategoryDAO extends WithDAO {
 	}
 
 	public static CategoryDAO getInstance(Context context) {
-		if(categoryDAO == null)
+		if (categoryDAO == null)
 			categoryDAO = new CategoryDAO(context);
 		return categoryDAO;
 	}

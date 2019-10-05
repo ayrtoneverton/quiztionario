@@ -36,6 +36,19 @@ public class DAO extends SQLiteOpenHelper {
 	static final String QUIZ_CATEGORY = "id_category";
 	static final String QUIZ_USER = "id_user";
 
+	// Table Question
+	static final String QUESTION_TABLE = "question";
+	static final String QUESTION_ID = "id_question";
+	static final String QUESTION_TEXT = "text";
+	static final String QUESTION_QUIZ = "id_quiz";
+	static final String QUESTION_OPTION = "id_option";
+
+	// Table Option
+	static final String OPTION_TABLE = "option";
+	static final String OPTION_ID = "id_option";
+	static final String OPTION_TEXT = "text";
+	static final String OPTION_QUESTION = "id_question";
+
 	private DAO(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
@@ -70,6 +83,19 @@ public class DAO extends SQLiteOpenHelper {
 				+ QUIZ_CATEGORY + " INTEGER,"
 				+ QUIZ_USER + " INTEGER"
 				+ ")");
+
+		db.execSQL("CREATE TABLE " + QUESTION_TABLE + "("
+				+ QUESTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+				+ QUESTION_TEXT + " TEXT,"
+				+ QUESTION_QUIZ + " INTEGER,"
+				+ QUESTION_OPTION + " INTEGER"
+				+ ")");
+
+		db.execSQL("CREATE TABLE " + OPTION_TABLE + "("
+				+ OPTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+				+ OPTION_TEXT + " TEXT,"
+				+ OPTION_QUESTION + " INTEGER"
+				+ ")");
 	}
 
 	@Override
@@ -77,6 +103,8 @@ public class DAO extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
 		db.execSQL("DROP TABLE IF EXISTS " + CATEGORY_TABLE);
 		db.execSQL("DROP TABLE IF EXISTS " + QUIZ_TABLE);
+		db.execSQL("DROP TABLE IF EXISTS " + QUESTION_TABLE);
+		db.execSQL("DROP TABLE IF EXISTS " + OPTION_TABLE);
 
 		onCreate(db);
 	}

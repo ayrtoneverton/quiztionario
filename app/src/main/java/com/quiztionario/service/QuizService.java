@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.quiztionario.dao.QuizDAO;
+import com.quiztionario.model.Question;
 import com.quiztionario.model.Quiz;
 import com.quiztionario.model.ValidationException;
 import com.quiztionario.model.WithContext;
@@ -27,13 +28,21 @@ public class QuizService extends WithContext {
 			if (quiz.getCategory().getId() == 0)
 				quiz.setCategory(CategoryService.getInstance(context).create(quiz.getCategory()));
 
-			if (quiz.isOpen())
-				quiz.setCode(null);
-			else
-				quiz.setCode((int)(Math.random() * 99999 + 1));
+			quiz.setCode(quiz.isOpen() ? null : (int)(Math.random() * 99999 + 1));
 			return null;
 		} else {
-			return QuizDAO.getInstance(context).create(quiz);
+			QuizDAO.getInstance(context).beginTransaction();
+			try {
+				QuizDAO.getInstance(context).create(quiz);
+				for (Question q: quiz.getQuestions()) {
+					q.setQuiz(quiz);
+					QuestionService.getInstance(context).create(q);
+				}
+				QuizDAO.getInstance(context).setTransactionSuccessful();
+			} finally {
+				QuizDAO.getInstance(context).endTransaction();
+			}
+			return quiz;
 		}
 	}
 

@@ -6,11 +6,14 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -21,7 +24,7 @@ import com.quiztionario.model.Question;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateQuestionsAdapter extends BaseAdapter implements View.OnClickListener {
+public class CreateQuestionsAdapter extends BaseAdapter implements View.OnClickListener, AdapterView.OnItemClickListener {
 	private List<Question> questions = new ArrayList<>();
 	private LayoutInflater inflater;
 
@@ -43,8 +46,9 @@ public class CreateQuestionsAdapter extends BaseAdapter implements View.OnClickL
 		ListView optionsView = v.findViewById(R.id.create_question_options);
 		optionsView.setAdapter(new ArrayAdapter<>(
 				inflater.getContext(),
-				android.R.layout.simple_list_item_multiple_choice,
+				android.R.layout.simple_list_item_single_choice,
 				questions.get(i).getOptions()));
+		optionsView.setOnItemClickListener(this);
 		return v;
 	}
 
@@ -68,15 +72,30 @@ public class CreateQuestionsAdapter extends BaseAdapter implements View.OnClickL
 				.setView(input)
 				.setPositiveButton("Add", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
+						String text = input.getText().toString();
+						if (text.isEmpty())
+							return;
 						if (question == null) {
-							questions.add(new Question(input.getText().toString()));
+							questions.add(new Question(text));
+							Toast.makeText(inflater.getContext(), "Question added", Toast.LENGTH_LONG).show();
 						} else {
-							question.getOptions().add(new Option(input.getText().toString(), question));
+							question.getOptions().add(new Option(text, question));
+							Toast.makeText(inflater.getContext(), "Option added", Toast.LENGTH_LONG).show();
 						}
 						notifyDataSetChanged();
 					}
 				})
 				.show();
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
+		Option op = (Option) parent.getItemAtPosition(i);
+		op.getQuestion().setCorrect(op);
+		for(int j = 0; j < parent.getChildCount(); ++j) {
+			((CheckedTextView) parent.getChildAt(j)).setChecked(false);
+		}
+		((CheckedTextView) view).setChecked(true);
 	}
 
 	@Override
@@ -94,7 +113,7 @@ public class CreateQuestionsAdapter extends BaseAdapter implements View.OnClickL
 		return i;
 	}
 
-	public List<Question> getQuestions() {
+	List<Question> getQuestions() {
 		return questions;
 	}
 }

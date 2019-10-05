@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import java.io.Serializable;
 
 public class Option implements Serializable {
-    private int id;
+    private long id;
     private String text;
     private Question question;
 
@@ -16,10 +16,10 @@ public class Option implements Serializable {
         this.question = question;
     }
 
-	public int getId() {
+	public long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
     public String getText() {
