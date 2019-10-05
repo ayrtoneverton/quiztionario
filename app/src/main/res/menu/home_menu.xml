@@ -6,15 +6,17 @@
     android:layout_height="wrap_content">
 
     <item
+        android:id="@+id/item_menu_search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="Search Quiz"
+        app:showAsAction = "ifRoom"/>
+
+    <item
         android:id="@+id/item_menu_add"
         android:icon="@android:drawable/ic_menu_add"
         android:title="New Quiz"
         app:showAsAction = "ifRoom"/>
     <!--
-    <item
-        android:id="@+id/item_1"
-        android:title="item 1"
-        app:showAsAction = "never"/>
     <item
         android:id="@+id/item_2"
         android:title="item 2"

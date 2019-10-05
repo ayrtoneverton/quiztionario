@@ -47,12 +47,15 @@ public class HomeActivity extends AppCompatActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.item_menu_add) {
-			startActivityForResult(new Intent(this, NewQuizActivity.class).putExtra("user", user), 0);
-			return true;
-		} else {
-			return super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+			case R.id.item_menu_add:
+				startActivityForResult(new Intent(this, NewQuizActivity.class).putExtra("user", user), 0);
+				return true;
+			case R.id.item_menu_search:
+				startActivity(new Intent(this, SearchActivity.class));
+				return true;
 		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
