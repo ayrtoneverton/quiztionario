@@ -2,10 +2,12 @@ package com.quiztionario.service;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.widget.Toast;
 
 import com.quiztionario.dao.QuizDAO;
 import com.quiztionario.model.Question;
 import com.quiztionario.model.Quiz;
+import com.quiztionario.model.User;
 import com.quiztionario.model.ValidationException;
 import com.quiztionario.model.WithContext;
 
@@ -68,5 +70,15 @@ public class QuizService extends WithContext {
 			throw new ValidationException("You need a Text to search.");
 
 		return QuizDAO.getInstance(context).findAllByText(text);
+	}
+
+	public Integer attemptedQuiz(User user) throws ValidationException {
+		if (user == null){
+			throw new ValidationException("Invalid user");
+
+		}else {
+			return QuizDAO.getInstance(context).findAttempted(user);
+		}
+
 	}
 }

@@ -105,6 +105,19 @@ public class QuizDAO extends WithDAO {
 		c.close();
 		return result;
 	}
+	public Integer findAttempted(User user) {
+		SQLiteDatabase db = dao.getReadableDatabase();
+		Cursor c = db.rawQuery(ANSWER_TABLE,
+				new String[]{"SELECT COUNT(a.ANSWER_ID)" +
+						"FROM ANSWER_TABLE a, USER_TABLE u" +
+						"WHERE u.USER_NAME = " + user.getName() + "AND u.USER_ID = a.ANSWER_CREATOR"});
+
+
+		c.moveToFirst();
+		int count = c.getInt(0);
+		c.close();
+		return count;
+	}
 
 	public static QuizDAO getInstance(Context context) {
 		if (quizDAO == null)

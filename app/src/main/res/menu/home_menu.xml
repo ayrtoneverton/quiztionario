@@ -16,6 +16,12 @@
         android:icon="@android:drawable/ic_menu_add"
         android:title="New Quiz"
         app:showAsAction = "ifRoom"/>
+
+    <item
+        android:id="@+id/item_menu_relatory"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="Relatory"
+        app:showAsAction="ifRoom" />
     <!--
     <item
         android:id="@+id/item_2"
