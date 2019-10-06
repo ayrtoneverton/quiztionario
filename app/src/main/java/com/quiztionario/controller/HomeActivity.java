@@ -42,7 +42,7 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
 				startActivityForResult(new Intent(this, NewQuizActivity.class).putExtra("user", user), 0);
 				return true;
 			case R.id.item_menu_search:
-				startActivity(new Intent(this, SearchActivity.class));
+				startActivity(new Intent(this, SearchActivity.class).putExtra("user", user));
 				return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -50,15 +50,16 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == Activity.RESULT_OK && data != null)
 			myQuizzesAdapter.addQuiz((Quiz) data.getSerializableExtra("quiz"));
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-		startActivity(new Intent(view.getContext(), AnswerActivity.class)
+		/*startActivity(new Intent(view.getContext(), AnswerActivity.class)
 				.putExtra("user", user)
-				.putExtra("quiz", (Quiz) myQuizzesAdapter.getItem(i)));
+				.putExtra("quiz", (Quiz) myQuizzesAdapter.getItem(i)));*/
 	}
 
 	@Override

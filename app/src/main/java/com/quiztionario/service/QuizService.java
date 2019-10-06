@@ -2,7 +2,6 @@ package com.quiztionario.service;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.widget.Toast;
 
 import com.quiztionario.dao.QuizDAO;
 import com.quiztionario.model.Question;
@@ -58,22 +57,16 @@ public class QuizService extends WithContext {
 	}
 
 	public Quiz searchCode(String code) throws ValidationException {
-		if(code.trim().isEmpty()){
+		if (code == null || code.trim().isEmpty())
 			throw new ValidationException("Quiz code is required");
-		}else if(QuizDAO.getInstance(context).findbyCode(Integer.parseInt(code))==null){
-			throw new ValidationException("There is no valid Quiz with this code!");
-		}else{
-			return QuizDAO.getInstance(context).findbyCode(Integer.parseInt(code));
-		}
+
+		return QuizDAO.getInstance(context).findByCode(code);
 	}
 
 	public ArrayList<Quiz> searchText(String text) throws ValidationException {
-		if(text.trim().isEmpty()){
+		if(text.trim().isEmpty())
 			throw new ValidationException("You need a Text to search.");
-		}else if(QuizDAO.getInstance(context).findAllByText(text)==null){
-			throw new ValidationException("There is no valid Quiz with this text!");
-		}else{
-			return QuizDAO.getInstance(context).findAllByText(text);
-		}
+
+		return QuizDAO.getInstance(context).findAllByText(text);
 	}
 }

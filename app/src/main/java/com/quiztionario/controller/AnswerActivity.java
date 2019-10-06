@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.quiztionario.R;
 import com.quiztionario.model.Quiz;
 import com.quiztionario.model.User;
+import com.quiztionario.model.ValidationException;
+import com.quiztionario.service.AnswerService;
 
 public class AnswerActivity extends AppCompatActivity {
 	private AnswerQuestionsAdapter answerQuestionsAdapter;
@@ -27,6 +30,12 @@ public class AnswerActivity extends AppCompatActivity {
 	}
 
 	public void save(View view) {
-		answerQuestionsAdapter.getAnswer();
+		try {
+			AnswerService.getInstance(this).create(answerQuestionsAdapter.getAnswer());
+			Toast.makeText(this, "Recorded Answer", Toast.LENGTH_LONG).show();
+			finish();
+		} catch (ValidationException e) {
+			e.show(this);
+		}
 	}
 }

@@ -41,11 +41,11 @@ public class QuizDAO extends WithDAO {
 		SQLiteDatabase db = dao.getReadableDatabase();
 		Cursor c = db.query(QUIZ_TABLE, null,
 				QUIZ_USER + " = ?",
-				new String[]{ String.valueOf(user.getId()) },
+				new String[]{String.valueOf(user.getId())},
 				null, null, null);
 
 		List<Quiz> result = new ArrayList<>();
-		while(c.moveToNext()) {
+		while (c.moveToNext()) {
 			result.add(new Quiz(
 					c.getLong(c.getColumnIndex(QUIZ_ID)),
 					c.getString(c.getColumnIndex(QUIZ_NAME)),
@@ -54,72 +54,60 @@ public class QuizDAO extends WithDAO {
 					getDate(c.getString(c.getColumnIndex(QUIZ_START))),
 					getDate(c.getString(c.getColumnIndex(QUIZ_END))),
 					new Category(c.getLong(c.getColumnIndex(QUIZ_CATEGORY))),
-					new User(c.getLong(c.getColumnIndex(QUIZ_USER)))
-			));
+					new User(c.getLong(c.getColumnIndex(QUIZ_USER)))));
 		}
 		c.close();
 		return result;
 	}
 
-	public Quiz findbyCode(Integer code) {
+	public Quiz findByCode(String code) {
 		SQLiteDatabase db = dao.getReadableDatabase();
 		Cursor c = db.query(QUIZ_TABLE, null,
 				QUIZ_CODE + " = ?",
-				new String[]{ String.valueOf(code) },
+				new String[]{code},
 				null, null, null);
 
-		while(c.moveToNext()) {
-			if(code == c.getInt(c.getColumnIndex(QUIZ_CODE))){
-				Quiz result = new Quiz(
-						c.getLong(c.getColumnIndex(QUIZ_ID)),
-						c.getString(c.getColumnIndex(QUIZ_NAME)),
-						c.getInt(c.getColumnIndex(QUIZ_OPEN)) == 1,
-						c.getInt(c.getColumnIndex(QUIZ_CODE)),
-						getDate(c.getString(c.getColumnIndex(QUIZ_START))),
-						getDate(c.getString(c.getColumnIndex(QUIZ_END))),
-						new Category(c.getLong(c.getColumnIndex(QUIZ_CATEGORY))),
-						new User(c.getLong(c.getColumnIndex(QUIZ_USER)))
-				);
-				c.close();
-				return result;
-			}
+		Quiz result = null;
+		while (c.moveToNext()) {
+			result = new Quiz(
+					c.getLong(c.getColumnIndex(QUIZ_ID)),
+					c.getString(c.getColumnIndex(QUIZ_NAME)),
+					c.getInt(c.getColumnIndex(QUIZ_OPEN)) == 1,
+					c.getInt(c.getColumnIndex(QUIZ_CODE)),
+					getDate(c.getString(c.getColumnIndex(QUIZ_START))),
+					getDate(c.getString(c.getColumnIndex(QUIZ_END))),
+					new Category(c.getLong(c.getColumnIndex(QUIZ_CATEGORY))),
+					new User(c.getLong(c.getColumnIndex(QUIZ_USER))));
 		}
 		c.close();
-		return null;
+		return result;
 	}
+
 	public ArrayList<Quiz> findAllByText(String text) {
 		SQLiteDatabase db = dao.getReadableDatabase();
 		Cursor c = db.query(QUIZ_TABLE, null,
 				QUIZ_NAME + " like '%?%'",
-				new String[]{ String.valueOf(text) },
+				new String[]{text},
 				null, null, null);
 
 		ArrayList<Quiz> result = new ArrayList<>();
-		Integer i = 0;
-		if(c.getCount() != 0){
-			while(c.moveToNext() && i < 19) {
-				result.add(new Quiz(
-						c.getLong(c.getColumnIndex(QUIZ_ID)),
-						c.getString(c.getColumnIndex(QUIZ_NAME)),
-						c.getInt(c.getColumnIndex(QUIZ_OPEN)) == 1,
-						c.getInt(c.getColumnIndex(QUIZ_CODE)),
-						getDate(c.getString(c.getColumnIndex(QUIZ_START))),
-						getDate(c.getString(c.getColumnIndex(QUIZ_END))),
-						new Category(c.getLong(c.getColumnIndex(QUIZ_CATEGORY))),
-						new User(c.getLong(c.getColumnIndex(QUIZ_USER)))
-				));
-				++i;
-			}
-			c.close();
-			return null;
+		while (c.moveToNext()) {
+			result.add(new Quiz(
+					c.getLong(c.getColumnIndex(QUIZ_ID)),
+					c.getString(c.getColumnIndex(QUIZ_NAME)),
+					c.getInt(c.getColumnIndex(QUIZ_OPEN)) == 1,
+					c.getInt(c.getColumnIndex(QUIZ_CODE)),
+					getDate(c.getString(c.getColumnIndex(QUIZ_START))),
+					getDate(c.getString(c.getColumnIndex(QUIZ_END))),
+					new Category(c.getLong(c.getColumnIndex(QUIZ_CATEGORY))),
+					new User(c.getLong(c.getColumnIndex(QUIZ_USER)))));
 		}
-
 		c.close();
 		return result;
 	}
 
 	public static QuizDAO getInstance(Context context) {
-		if(quizDAO == null)
+		if (quizDAO == null)
 			quizDAO = new QuizDAO(context);
 		return quizDAO;
 	}

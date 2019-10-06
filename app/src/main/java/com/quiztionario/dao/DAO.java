@@ -33,21 +33,34 @@ public class DAO extends SQLiteOpenHelper {
 	static final String QUIZ_CODE = "code";
 	static final String QUIZ_START= "start_date";
 	static final String QUIZ_END = "end_date";
-	static final String QUIZ_CATEGORY = "id_category";
-	static final String QUIZ_USER = "id_user";
+	static final String QUIZ_CATEGORY = "quiz_id_category";
+	static final String QUIZ_USER = "quiz_id_user";
 
 	// Table Question
 	static final String QUESTION_TABLE = "question";
 	static final String QUESTION_ID = "id_question";
 	static final String QUESTION_TEXT = "text";
-	static final String QUESTION_QUIZ = "id_quiz";
-	static final String QUESTION_OPTION = "id_option";
+	static final String QUESTION_QUIZ = "question_id_quiz";
+	static final String QUESTION_OPTION = "question_id_option";
 
 	// Table Option
 	static final String OPTION_TABLE = "option";
 	static final String OPTION_ID = "id_option";
 	static final String OPTION_TEXT = "text";
-	static final String OPTION_QUESTION = "id_question";
+	static final String OPTION_QUESTION = "option_id_question";
+
+	// Table Answer
+	static final String ANSWER_TABLE = "answer";
+	static final String ANSWER_ID = "id_answer";
+	static final String ANSWER_QUIZ = "answer_id_quiz";
+	static final String ANSWER_CREATOR = "answer_id_user";
+
+	// Table AnswerQuestion
+	static final String ANSWER_QUESTION_TABLE = "answer_question";
+	static final String ANSWER_QUESTION_ID = "id_answer_question";
+	static final String ANSWER_QUESTION_ANSWER = "answer_question_id_answer";
+	static final String ANSWER_QUESTION_QUESTION = "answer_question_id_question";
+	static final String ANSWER_QUESTION_OPTION = "answer_question_id_option";
 
 	private DAO(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -96,6 +109,19 @@ public class DAO extends SQLiteOpenHelper {
 				+ OPTION_TEXT + " TEXT,"
 				+ OPTION_QUESTION + " INTEGER"
 				+ ")");
+
+		db.execSQL("CREATE TABLE " + ANSWER_TABLE + "("
+				+ ANSWER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+				+ ANSWER_QUIZ + " INTEGER,"
+				+ ANSWER_CREATOR + " INTEGER"
+				+ ")");
+
+		db.execSQL("CREATE TABLE " + ANSWER_QUESTION_TABLE + "("
+				+ ANSWER_QUESTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+				+ ANSWER_QUESTION_ANSWER + " INTEGER,"
+				+ ANSWER_QUESTION_QUESTION + " INTEGER,"
+				+ ANSWER_QUESTION_OPTION + " INTEGER"
+				+ ")");
 	}
 
 	@Override
@@ -105,6 +131,8 @@ public class DAO extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + QUIZ_TABLE);
 		db.execSQL("DROP TABLE IF EXISTS " + QUESTION_TABLE);
 		db.execSQL("DROP TABLE IF EXISTS " + OPTION_TABLE);
+		db.execSQL("DROP TABLE IF EXISTS " + ANSWER_TABLE);
+		db.execSQL("DROP TABLE IF EXISTS " + ANSWER_QUESTION_TABLE);
 
 		onCreate(db);
 	}

@@ -26,15 +26,8 @@ public class AnswerQuestionsAdapter extends BaseAdapter implements View.OnClickL
 	AnswerQuestionsAdapter(Context context, Quiz quiz, User user) {
 		this.inflater = LayoutInflater.from(context);
 		this.answer = new Answer(quiz, user);
-		/*for (Question question: quiz.getQuestions()) {
-			answer.getAnswers().add(new AnswerQuestion(question));
-		}*/
-		for (int i = 0; i < 5; ++i) {
-			Question question = new Question("Question "+(i+1));
-			for (int j = 0; j < 5; ++j) {
-				question.getOptions().add(new Option("Option"+(j+1), question));
-			}
-			answer.getAnswers().add(new AnswerQuestion(question));
+		for (Question question: quiz.getQuestions()) {
+			answer.getAnswers().add(new AnswerQuestion(answer, question));
 		}
 		TypedValue outValue = new TypedValue();
 		context.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);

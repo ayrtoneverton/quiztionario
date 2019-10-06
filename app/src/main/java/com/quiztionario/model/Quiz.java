@@ -1,6 +1,7 @@
 package com.quiztionario.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class Quiz implements Serializable {
 		this.end = end;
 		this.category = category;
 		this.creator = creator;
+		this.questions = new ArrayList<>();
 	}
 
 	public long getId() {

@@ -2,15 +2,25 @@ package com.quiztionario.model;
 
 public class AnswerQuestion {
 	private long id;
+	private Answer answer;
 	private Question question;
 	private Option option;
 
-	public AnswerQuestion(Question question) {
+	public AnswerQuestion(Answer answer, Question question) {
+		this.answer = answer;
 		this.question = question;
 	}
 
 	public long getId() {
 		return id;
+	}
+
+	public Answer getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(Answer answer) {
+		this.answer = answer;
 	}
 
 	public void setId(long id) {
@@ -32,5 +42,4 @@ public class AnswerQuestion {
 	public void setOption(Option option) {
 		this.option = option;
 	}
-
 }

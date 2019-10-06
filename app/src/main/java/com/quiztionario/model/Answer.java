@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Answer implements Serializable {
-	private int id;
+	private long id;
 	private Quiz quiz;
 	private User creator;
 	private List<AnswerQuestion> answers;
@@ -16,11 +16,11 @@ public class Answer implements Serializable {
 		this.answers = new ArrayList<>();
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
