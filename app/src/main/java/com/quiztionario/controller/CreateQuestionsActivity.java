@@ -26,7 +26,6 @@ public class CreateQuestionsActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_create_questions);
 
 		quiz = (Quiz) getIntent().getSerializableExtra("quiz");
-
 		questionsAdapter = new CreateQuestionsAdapter(this);
 		((ListView) findViewById(R.id.create_question_list)).setAdapter(questionsAdapter);
 	}

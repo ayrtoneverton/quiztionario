@@ -9,8 +9,6 @@ public class Option implements Serializable {
     private String text;
     private Question question;
 
-    public Option() {}
-
     public Option(String text, Question question) {
         this.text = text;
         this.question = question;

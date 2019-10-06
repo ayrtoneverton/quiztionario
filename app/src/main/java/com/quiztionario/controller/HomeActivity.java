@@ -18,9 +18,7 @@ import com.quiztionario.dao.QuizDAO;
 import com.quiztionario.model.Quiz;
 import com.quiztionario.model.User;
 
-import java.util.List;
-
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 	private User user;
 	private MyQuizzesAdapter myQuizzesAdapter;
 
@@ -29,19 +27,11 @@ public class HomeActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 
 		user = (User) getIntent().getSerializableExtra("user");
-		final List<Quiz> listQuizzes = QuizDAO.getInstance(this).findQuizByUser(user);
-		myQuizzesAdapter = new MyQuizzesAdapter(this, listQuizzes);
+		myQuizzesAdapter = new MyQuizzesAdapter(this, QuizDAO.getInstance(this).findQuizByUser(user));
 
 		final ListView listView = new ListView(this);
 		listView.setAdapter(myQuizzesAdapter);
-		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-				startActivity(
-						new Intent(view.getContext(), QuestionActivity.class)
-								.putExtra("quiz", listQuizzes.get(i)));
-			}
-		});
+		listView.setOnItemClickListener(this);
 		setContentView(listView);
 	}
 
@@ -62,6 +52,13 @@ public class HomeActivity extends AppCompatActivity {
 	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 		if (resultCode == Activity.RESULT_OK && data != null)
 			myQuizzesAdapter.addQuiz((Quiz) data.getSerializableExtra("quiz"));
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+		startActivity(new Intent(view.getContext(), AnswerActivity.class)
+				.putExtra("user", user)
+				.putExtra("quiz", (Quiz) myQuizzesAdapter.getItem(i)));
 	}
 
 	@Override

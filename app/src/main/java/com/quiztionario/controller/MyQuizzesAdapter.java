@@ -36,7 +36,7 @@ public class MyQuizzesAdapter extends BaseAdapter {
 		return row;
 	}
 
-	public void addQuiz(Quiz quiz) {
+	void addQuiz(Quiz quiz) {
 		quizzes.add(quiz);
 		notifyDataSetChanged();
 	}

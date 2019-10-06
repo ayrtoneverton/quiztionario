@@ -16,8 +16,7 @@ public class Quiz implements Serializable {
 	private List<Answer> answers;
 	private List<Question> questions;
 
-	public Quiz() {
-	}
+	public Quiz() {}
 
 	public Quiz(long id, String name, boolean open, Integer code, GregorianCalendar start, GregorianCalendar end, Category category, User creator) {
 		this.id = id;
