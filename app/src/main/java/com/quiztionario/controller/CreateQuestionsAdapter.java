@@ -92,7 +92,7 @@ public class CreateQuestionsAdapter extends BaseAdapter implements View.OnClickL
 	public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
 		Option op = (Option) parent.getItemAtPosition(i);
 		op.getQuestion().setCorrect(op);
-		for(int j = 0; j < parent.getChildCount(); ++j) {
+		for (int j = 0; j < parent.getChildCount(); ++j) {
 			((CheckedTextView) parent.getChildAt(j)).setChecked(false);
 		}
 		((CheckedTextView) view).setChecked(true);

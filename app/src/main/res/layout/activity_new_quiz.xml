@@ -1,88 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".controller.NewQuizActivity"
-    android:fillViewport="true">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	tools:ignore="HardcodedText,Autofill,UnusedAttribute"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".controller.NewQuizActivity"
+	android:fillViewport="true">
 
-        <EditText
-            android:id="@+id/quiz_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Quiz Name"
-            android:defaultFocusHighlightEnabled="true"
-            android:layout_marginBottom="25sp"/>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:padding="20dp">
 
-        <Switch
-            android:id="@+id/quiz_open"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="18sp"
-            android:paddingHorizontal="4sp"
-            android:text="Public"
-            android:onClick="setOpen"
-            android:layout_marginBottom="25sp"/>
+		<EditText
+			android:id="@+id/quiz_name"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:inputType="text"
+			android:hint="Quiz Name"
+			android:defaultFocusHighlightEnabled="true"
+			android:layout_marginBottom="25sp" />
 
-        <AutoCompleteTextView
-            android:id="@+id/quiz_category"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Category"
-            android:layout_marginBottom="25sp"/>
+		<Switch
+			android:id="@+id/quiz_open"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:textColor="@android:color/darker_gray"
+			android:textSize="18sp"
+			android:paddingHorizontal="4sp"
+			android:text="Public"
+			android:onClick="setOpen"
+			android:layout_marginBottom="25sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="25sp">
-            <Button
-                android:id="@+id/quiz_start_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit Start Date"
-                android:onClick="editDate"/>
-            <TextView
-                android:id="@+id/quiz_view_start_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="None"
-                android:layout_marginLeft="15sp"/>
-        </LinearLayout>
+		<AutoCompleteTextView
+			android:id="@+id/quiz_category"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="Category"
+			android:layout_marginBottom="25sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="25sp">
-            <Button
-                android:id="@+id/quiz_end_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit End Date"
-                android:onClick="editDate"/>
-            <TextView
-                android:id="@+id/quiz_view_end_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="None"
-                android:layout_marginLeft="15sp"/>
-        </LinearLayout>
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:layout_marginBottom="25sp">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:textColor="@android:color/background_light"
-            android:layout_marginBottom="25sp"
-            android:text="Next Step"
-            android:onClick="submit"/>
-    </LinearLayout>
+			<Button
+				android:id="@+id/quiz_start_date"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Edit Start Date"
+				android:onClick="editDate" />
+
+			<TextView
+				android:id="@+id/quiz_view_start_date"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="None"
+				android:layout_marginStart="15sp" />
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:layout_marginBottom="25sp">
+
+			<Button
+				android:id="@+id/quiz_end_date"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Edit End Date"
+				android:onClick="editDate" />
+
+			<TextView
+				android:id="@+id/quiz_view_end_date"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="None"
+				android:layout_marginStart="15sp" />
+		</LinearLayout>
+
+		<Button
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@color/colorPrimary"
+			android:textColor="@android:color/background_light"
+			android:layout_marginBottom="25sp"
+			android:text="Next Step"
+			android:onClick="submit" />
+	</LinearLayout>
 </ScrollView>

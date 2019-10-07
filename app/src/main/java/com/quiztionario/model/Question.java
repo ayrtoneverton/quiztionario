@@ -10,7 +10,8 @@ public class Question implements Serializable {
 	private ArrayList<Option> options;
 	private Option correct;
 
-	public Question() {}
+	public Question() {
+	}
 
 	public Question(String text) {
 		this.text = text;

@@ -8,7 +8,8 @@ public class ValidationException extends Exception {
 	public ValidationException(String msg) {
 		super(msg);
 	}
-	public void show(AppCompatActivity activity){
+
+	public void show(AppCompatActivity activity) {
 		Toast.makeText(activity.getApplicationContext(), getMessage(), Toast.LENGTH_LONG).show();
 	}
 }

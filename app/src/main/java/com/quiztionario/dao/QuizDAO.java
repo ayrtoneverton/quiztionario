@@ -39,7 +39,7 @@ public class QuizDAO extends WithDAO {
 		return quiz;
 	}
 
-	public List<Quiz> findQuizByUser(User user) {
+	public List<Quiz> findAllByUser(User user) {
 		SQLiteDatabase db = dao.getReadableDatabase();
 		Cursor c = db.query(QUIZ_TABLE, null, QUIZ_USER + " = ?",
 				new String[]{String.valueOf(user.getId())},
@@ -63,8 +63,8 @@ public class QuizDAO extends WithDAO {
 
 	public Quiz findByCode(String code) {
 		SQLiteDatabase db = dao.getReadableDatabase();
-		String sql = "SELECT * FROM "+ QUIZ_TABLE +","+ QUESTION_TABLE +","+ OPTION_TABLE +" WHERE "
-				+ QUIZ_ID +"="+ QUESTION_QUIZ +" AND "+ QUESTION_ID +"="+ OPTION_QUESTION +" AND "+ QUIZ_CODE +"= ?";
+		String sql = "SELECT * FROM " + QUIZ_TABLE + "," + QUESTION_TABLE + "," + OPTION_TABLE + " WHERE "
+				+ QUIZ_ID + "=" + QUESTION_QUIZ + " AND " + QUESTION_ID + "=" + OPTION_QUESTION + " AND " + QUIZ_CODE + "= ?";
 		Cursor c = db.rawQuery(sql, new String[]{code});
 
 		Quiz result = null;
@@ -91,12 +91,12 @@ public class QuizDAO extends WithDAO {
 		return result;
 	}
 
-	public ArrayList<Quiz> findAllByName(String text) {
+	public List<Quiz> findAllByName(String text) {
 		SQLiteDatabase db = dao.getReadableDatabase();
-		String sql = "SELECT * FROM "+ QUIZ_TABLE +","+ QUESTION_TABLE +","+ OPTION_TABLE +" WHERE "
-				+ QUIZ_ID +"="+ QUESTION_QUIZ +" AND "+ QUESTION_ID +"="+ OPTION_QUESTION
-				+" AND "+ QUIZ_OPEN +" != 0" +" AND "+ QUIZ_NAME +" LIKE ?";
-		Cursor c = db.rawQuery(sql, new String[]{"%"+text+"%"});
+		String sql = "SELECT * FROM " + QUIZ_TABLE + "," + QUESTION_TABLE + "," + OPTION_TABLE + " WHERE "
+				+ QUIZ_ID + "=" + QUESTION_QUIZ + " AND " + QUESTION_ID + "=" + OPTION_QUESTION
+				+ " AND " + QUIZ_OPEN + " == 1 AND " + QUIZ_NAME + " LIKE ?";
+		Cursor c = db.rawQuery(sql, new String[]{"%" + text + "%"});
 
 		ArrayList<Quiz> result = new ArrayList<>();
 		Quiz lastQuiz = new Quiz();

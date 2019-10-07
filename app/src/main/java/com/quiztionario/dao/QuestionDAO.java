@@ -24,7 +24,7 @@ public class QuestionDAO extends WithDAO {
 		values.put(QUESTION_QUIZ, question.getQuiz().getId());
 		question.setId(db.insert(QUESTION_TABLE, null, values));
 
-		for (Option op: question.getOptions()) {
+		for (Option op : question.getOptions()) {
 			values.clear();
 			values.put(OPTION_TEXT, op.getText());
 			values.put(OPTION_QUESTION, question.getId());

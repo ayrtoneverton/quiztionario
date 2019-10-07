@@ -1,8 +1,5 @@
 package com.quiztionario.controller;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,11 +9,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.quiztionario.R;
-import com.quiztionario.dao.QuizDAO;
 import com.quiztionario.model.Quiz;
 import com.quiztionario.model.User;
+import com.quiztionario.model.ValidationException;
+import com.quiztionario.service.QuizService;
 
 public class HomeActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 	private User user;
@@ -27,8 +27,11 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
 		super.onCreate(savedInstanceState);
 
 		user = (User) getIntent().getSerializableExtra("user");
-		myQuizzesAdapter = new MyQuizzesAdapter(this, QuizDAO.getInstance(this).findQuizByUser(user));
-
+		try {
+			myQuizzesAdapter = new MyQuizzesAdapter(this, QuizService.getInstance(this).findAllByUser(user));
+		} catch (ValidationException e) {
+			e.show(this);
+		}
 		final ListView listView = new ListView(this);
 		listView.setAdapter(myQuizzesAdapter);
 		listView.setOnItemClickListener(this);
@@ -60,9 +63,8 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
 
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-		/*startActivity(new Intent(view.getContext(), AnswerActivity.class)
-				.putExtra("user", user)
-				.putExtra("quiz", (Quiz) myQuizzesAdapter.getItem(i)));*/
+		startActivity(new Intent(this, QuizReportActivity.class)
+				.putExtra("quiz", (Quiz) myQuizzesAdapter.getItem(i)));
 	}
 
 	@Override

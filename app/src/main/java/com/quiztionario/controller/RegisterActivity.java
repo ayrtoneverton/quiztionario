@@ -1,12 +1,12 @@
 package com.quiztionario.controller;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.quiztionario.R;
 import com.quiztionario.model.User;
@@ -25,11 +25,11 @@ public class RegisterActivity extends AppCompatActivity {
 	public void register(View view) {
 		try {
 			User user = UserService.getInstance(this).create(
-				new User(
-					((EditText) findViewById(R.id.register_name)).getText().toString(),
-					((EditText) findViewById(R.id.register_email)).getText().toString(),
-					((EditText) findViewById(R.id.register_password)).getText().toString()
-				)
+					new User(
+							((EditText) findViewById(R.id.register_name)).getText().toString(),
+							((EditText) findViewById(R.id.register_email)).getText().toString(),
+							((EditText) findViewById(R.id.register_password)).getText().toString()
+					)
 			);
 			setResult(Activity.RESULT_OK, new Intent().putExtra("user", user));
 			finish();

@@ -26,7 +26,7 @@ public class AnswerQuestionsAdapter extends BaseAdapter implements View.OnClickL
 	AnswerQuestionsAdapter(Context context, Quiz quiz, User user) {
 		this.inflater = LayoutInflater.from(context);
 		this.answer = new Answer(quiz, user);
-		for (Question question: quiz.getQuestions()) {
+		for (Question question : quiz.getQuestions()) {
 			answer.getAnswers().add(new AnswerQuestion(answer, question));
 		}
 		TypedValue outValue = new TypedValue();
@@ -41,11 +41,11 @@ public class AnswerQuestionsAdapter extends BaseAdapter implements View.OnClickL
 		AnswerQuestion answerQuestion = answer.getAnswers().get(i);
 		((TextView) v.findViewById(R.id.answer_question_text)).setText(answerQuestion.getQuestion().getText());
 		CheckedTextView item;
-		for (Option op: answerQuestion.getQuestion().getOptions()) {
+		for (Option op : answerQuestion.getQuestion().getOptions()) {
 			item = (CheckedTextView) inflater.inflate(android.R.layout.simple_list_item_single_choice, viewGroup, false);
 			item.setText(op.getText());
 			item.setBackgroundResource(itemBackgroundResource);
-			item.setTag(new Object[]{ answerQuestion, op, v });
+			item.setTag(new Object[]{answerQuestion, op, v});
 			item.setOnClickListener(this);
 			v.addView(item);
 		}
@@ -76,7 +76,7 @@ public class AnswerQuestionsAdapter extends BaseAdapter implements View.OnClickL
 		Object[] item = (Object[]) view.getTag();
 		((AnswerQuestion) item[0]).setOption((Option) item[1]);
 		ViewGroup v = (ViewGroup) item[2];
-		for(int i = 1; i < v.getChildCount(); ++i) {
+		for (int i = 1; i < v.getChildCount(); ++i) {
 			((CheckedTextView) v.getChildAt(i)).setChecked(false);
 		}
 		((CheckedTextView) view).setChecked(true);

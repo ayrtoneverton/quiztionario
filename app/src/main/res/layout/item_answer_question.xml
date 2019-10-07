@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	tools:ignore="ContentDescription,UnusedAttribute"
 	android:orientation="vertical"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:padding="20sp"
-	android:clickable="true">
+	android:clickable="true"
+	android:focusable="true">
+
 	<TextView
 		android:id="@+id/answer_question_text"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:textSize="18sp"
-		android:layout_marginBottom="20sp"/>
+		android:layout_marginBottom="20sp" />
 </LinearLayout>

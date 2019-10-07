@@ -31,7 +31,7 @@ public class DAO extends SQLiteOpenHelper {
 	static final String QUIZ_NAME = "name";
 	static final String QUIZ_OPEN = "open";
 	static final String QUIZ_CODE = "code";
-	static final String QUIZ_START= "start_date";
+	static final String QUIZ_START = "start_date";
 	static final String QUIZ_END = "end_date";
 	static final String QUIZ_CATEGORY = "quiz_id_category";
 	static final String QUIZ_USER = "quiz_id_user";
@@ -67,7 +67,7 @@ public class DAO extends SQLiteOpenHelper {
 	}
 
 	static DAO getInstance(Context context) {
-		if(dao == null)
+		if (dao == null)
 			dao = new DAO(context);
 		return dao;
 	}

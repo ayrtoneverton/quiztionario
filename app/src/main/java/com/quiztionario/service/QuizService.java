@@ -6,10 +6,11 @@ import android.content.Context;
 import com.quiztionario.dao.QuizDAO;
 import com.quiztionario.model.Question;
 import com.quiztionario.model.Quiz;
+import com.quiztionario.model.User;
 import com.quiztionario.model.ValidationException;
 import com.quiztionario.model.WithContext;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class QuizService extends WithContext {
 	@SuppressLint("StaticFieldLeak")
@@ -30,7 +31,7 @@ public class QuizService extends WithContext {
 			if (quiz.getCategory().getId() == 0)
 				quiz.setCategory(CategoryService.getInstance(context).create(quiz.getCategory()));
 
-			quiz.setCode(quiz.isOpen() ? null : (int)(Math.random() * 99999 + 1));
+			quiz.setCode(quiz.isOpen() ? null : (int) (Math.random() * 99999 + 1));
 			return null;
 		} else {
 			if (quiz.getQuestions().size() == 0)
@@ -38,7 +39,7 @@ public class QuizService extends WithContext {
 			QuizDAO.getInstance(context).beginTransaction();
 			try {
 				QuizDAO.getInstance(context).create(quiz);
-				for (Question q: quiz.getQuestions()) {
+				for (Question q : quiz.getQuestions()) {
 					q.setQuiz(quiz);
 					QuestionService.getInstance(context).create(q);
 				}
@@ -48,6 +49,13 @@ public class QuizService extends WithContext {
 			}
 			return quiz;
 		}
+	}
+
+	public List<Quiz> findAllByUser(User user) throws ValidationException {
+		if (user == null)
+			throw new ValidationException("Invalid user");
+
+		return QuizDAO.getInstance(context).findAllByUser(user);
 	}
 
 	public Quiz findByCode(String code) throws ValidationException {
@@ -62,15 +70,15 @@ public class QuizService extends WithContext {
 		return QuizDAO.getInstance(context).findByCode(code);
 	}
 
-	public ArrayList<Quiz> findAllByName(String text) throws ValidationException {
-		if(text == null || text.trim().isEmpty())
+	public List<Quiz> findAllByName(String text) throws ValidationException {
+		if (text == null || text.trim().isEmpty())
 			throw new ValidationException("You need a Text to search");
 
 		return QuizDAO.getInstance(context).findAllByName(text);
 	}
 
 	public static QuizService getInstance(Context context) {
-		if(service == null)
+		if (service == null)
 			service = new QuizService(context);
 		return service;
 	}

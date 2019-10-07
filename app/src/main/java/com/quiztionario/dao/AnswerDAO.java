@@ -2,12 +2,12 @@ package com.quiztionario.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.quiztionario.model.Answer;
 import com.quiztionario.model.AnswerQuestion;
+import com.quiztionario.model.Quiz;
 import com.quiztionario.model.User;
 
 import static com.quiztionario.dao.DAO.*;
@@ -27,7 +27,7 @@ public class AnswerDAO extends WithDAO {
 		values.put(ANSWER_CREATOR, answer.getCreator().getId());
 		answer.setId(db.insert(ANSWER_TABLE, null, values));
 
-		for (AnswerQuestion aq: answer.getAnswers()) {
+		for (AnswerQuestion aq : answer.getAnswers()) {
 			values.clear();
 			values.put(ANSWER_QUESTION_ANSWER, answer.getId());
 			values.put(ANSWER_QUESTION_QUESTION, aq.getQuestion().getId());
@@ -38,8 +38,11 @@ public class AnswerDAO extends WithDAO {
 	}
 
 	public long countByUser(User user) {
-		SQLiteDatabase db = dao.getReadableDatabase();
-		return DatabaseUtils.queryNumEntries(db, ANSWER_TABLE, ANSWER_CREATOR +"="+ user.getId());
+		return DatabaseUtils.queryNumEntries(dao.getReadableDatabase(), ANSWER_TABLE, ANSWER_CREATOR + "=" + user.getId());
+	}
+
+	public long countByQuiz(Quiz quiz) {
+		return DatabaseUtils.queryNumEntries(dao.getReadableDatabase(), ANSWER_TABLE, ANSWER_QUIZ + "=" + quiz.getId());
 	}
 
 	public static AnswerDAO getInstance(Context context) {

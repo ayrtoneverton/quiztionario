@@ -32,8 +32,8 @@ public class CategoryDAO extends WithDAO {
 	public List<Category> find(String find) {
 		SQLiteDatabase db = dao.getReadableDatabase();
 		Cursor c = db.query(CATEGORY_TABLE, null,
-				"lower("+ CATEGORY_NAME + ") like '%'||lower(?)||'%'",
-				new String[]{ find },
+				CATEGORY_NAME + " LIKE ?",
+				new String[]{"%" + find + "%"},
 				null, null, null);
 
 		List<Category> result = new ArrayList<>();

@@ -13,6 +13,7 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme"
 		tools:ignore="GoogleAppIndexingWarning">
+		<activity android:name=".controller.QuizReportActivity" />
 		<activity android:name=".controller.MyReportActivity" />
 		<activity android:name=".controller.SearchActivity" />
 		<activity android:name=".controller.CreateQuestionsActivity" />
@@ -30,4 +31,5 @@
 	</application>
 
 	<dist:module dist:instant="true" />
+
 </manifest>

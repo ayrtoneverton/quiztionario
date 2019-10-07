@@ -1,7 +1,5 @@
 package com.quiztionario.controller;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.quiztionario.R;
 import com.quiztionario.model.Quiz;
@@ -36,9 +36,13 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 	public void searchCode(View view) {
 		String code = ((EditText) findViewById(R.id.search_code)).getText().toString();
 		try {
-			startActivity(new Intent(view.getContext(), AnswerActivity.class)
-					.putExtra("user", user)
-					.putExtra("quiz", QuizService.getInstance(this).findByCode(code)));
+			Quiz quiz = QuizService.getInstance(this).findByCode(code);
+			if (quiz == null)
+				Toast.makeText(this, "No quiz found", Toast.LENGTH_LONG).show();
+			else
+				startActivity(new Intent(view.getContext(), AnswerActivity.class)
+						.putExtra("user", user)
+						.putExtra("quiz", quiz));
 		} catch (ValidationException msg) {
 			msg.show(this);
 		}

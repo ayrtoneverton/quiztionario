@@ -1,10 +1,5 @@
 package com.quiztionario.controller;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -20,12 +15,18 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.quiztionario.R;
 import com.quiztionario.model.Category;
 import com.quiztionario.model.Quiz;
 import com.quiztionario.model.User;
 import com.quiztionario.model.ValidationException;
 import com.quiztionario.service.QuizService;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class NewQuizActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,
 		TimePickerDialog.OnTimeSetListener, AutoCompleteAdapter.OnSelectAutoComplete {
@@ -42,7 +43,6 @@ public class NewQuizActivity extends AppCompatActivity implements DatePickerDial
 		quiz = new Quiz();
 		quiz.setCategory(new Category());
 		quiz.setCreator((User) getIntent().getSerializableExtra("user"));
-
 		((AutoCompleteTextView) findViewById(R.id.quiz_category))
 				.setAdapter(new AutoCompleteAdapter(this, this));
 	}
@@ -100,7 +100,7 @@ public class NewQuizActivity extends AppCompatActivity implements DatePickerDial
 	public void onSelectAutoComplete(Category category) {
 		if (category == null) {
 			quiz.setCategory(new Category());
-		} else{
+		} else {
 			quiz.setCategory(category);
 			((AutoCompleteTextView) findViewById(R.id.quiz_category)).setText(category.getName());
 		}
@@ -125,6 +125,7 @@ public class NewQuizActivity extends AppCompatActivity implements DatePickerDial
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == Activity.RESULT_OK) {
 			setResult(resultCode, data);
 			finish();

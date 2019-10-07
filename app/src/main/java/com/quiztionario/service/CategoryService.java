@@ -25,7 +25,7 @@ public class CategoryService extends WithContext {
 		return CategoryDAO.getInstance(context).create(category);
 	}
 
-	public List<Category> find(String find){
+	public List<Category> find(String find) {
 		if (find == null || find.trim().isEmpty())
 			return null;
 
@@ -33,7 +33,7 @@ public class CategoryService extends WithContext {
 	}
 
 	public static CategoryService getInstance(Context context) {
-		if(service == null)
+		if (service == null)
 			service = new CategoryService(context);
 		return service;
 	}

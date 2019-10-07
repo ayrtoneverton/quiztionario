@@ -4,7 +4,7 @@
 	tools:ignore="HardcodedText"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".controller.MyReportActivity">
+	tools:context=".controller.QuizReportActivity">
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -14,7 +14,7 @@
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
-			android:text="My Report"
+			android:text="Quiz Report"
 			android:textSize="25sp"
 			android:layout_margin="20sp" />
 
@@ -27,11 +27,11 @@
 			<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="Number of Quizzes Answered: "
+				android:text="Number of Answer: "
 				android:textSize="16sp" />
 
 			<TextView
-				android:id="@+id/my_report_quantity_answers"
+				android:id="@+id/quiz_report_quantity_answers"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textSize="16sp" />

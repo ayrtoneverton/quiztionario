@@ -41,7 +41,7 @@ public class UserService extends WithContext {
 	}
 
 	public static UserService getInstance(Context context) {
-		if(service == null)
+		if (service == null)
 			service = new UserService(context);
 		return service;
 	}

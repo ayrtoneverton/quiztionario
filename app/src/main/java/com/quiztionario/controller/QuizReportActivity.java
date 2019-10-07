@@ -6,21 +6,21 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.quiztionario.R;
-import com.quiztionario.model.User;
+import com.quiztionario.model.Quiz;
 import com.quiztionario.model.ValidationException;
 import com.quiztionario.service.AnswerService;
 
-public class MyReportActivity extends AppCompatActivity {
+public class QuizReportActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_my_report);
+		setContentView(R.layout.activity_quiz_report);
 
-		User user = (User) getIntent().getSerializableExtra("user");
+		Quiz quiz = (Quiz) getIntent().getSerializableExtra("quiz");
 		try {
-			((TextView) findViewById(R.id.my_report_quantity_answers)).setText(String.valueOf(
-					AnswerService.getInstance(this).countByUser(user)));
+			((TextView) findViewById(R.id.quiz_report_quantity_answers)).setText(String.valueOf(
+					AnswerService.getInstance(this).countByQuiz(quiz)));
 		} catch (ValidationException e) {
 			e.printStackTrace();
 		}

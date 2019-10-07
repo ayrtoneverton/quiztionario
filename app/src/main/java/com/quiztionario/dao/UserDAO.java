@@ -31,12 +31,12 @@ public class UserDAO extends WithDAO {
 	public User login(String email, String password) {
 		SQLiteDatabase db = dao.getReadableDatabase();
 		Cursor c = db.query(USER_TABLE, null,
-				USER_EMAIL + " = ? and "+ USER_PASSWORD +" = ?",
-				new String[]{ email, password },
+				USER_EMAIL + " = ? and " + USER_PASSWORD + " = ?",
+				new String[]{email, password},
 				null, null, null);
 
 		User user = null;
-		if(c.moveToFirst()) {
+		if (c.moveToFirst()) {
 			user = new User(
 					c.getLong(c.getColumnIndex(USER_ID)),
 					c.getString(c.getColumnIndex(USER_NAME)),
@@ -49,7 +49,7 @@ public class UserDAO extends WithDAO {
 	}
 
 	public static UserDAO getInstance(Context context) {
-		if(userDAO == null)
+		if (userDAO == null)
 			userDAO = new UserDAO(context);
 		return userDAO;
 	}
