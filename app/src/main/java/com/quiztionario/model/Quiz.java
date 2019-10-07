@@ -1,5 +1,7 @@
 package com.quiztionario.model;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -109,5 +111,11 @@ public class Quiz implements Serializable {
 
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
+	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return name;
 	}
 }

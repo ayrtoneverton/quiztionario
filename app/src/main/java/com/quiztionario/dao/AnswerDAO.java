@@ -2,10 +2,13 @@ package com.quiztionario.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.quiztionario.model.Answer;
 import com.quiztionario.model.AnswerQuestion;
+import com.quiztionario.model.User;
 
 import static com.quiztionario.dao.DAO.*;
 
@@ -32,6 +35,11 @@ public class AnswerDAO extends WithDAO {
 			aq.setId(db.insert(ANSWER_QUESTION_TABLE, null, values));
 		}
 		return answer;
+	}
+
+	public long countByUser(User user) {
+		SQLiteDatabase db = dao.getReadableDatabase();
+		return DatabaseUtils.queryNumEntries(db, ANSWER_TABLE, ANSWER_CREATOR +"="+ user.getId());
 	}
 
 	public static AnswerDAO getInstance(Context context) {

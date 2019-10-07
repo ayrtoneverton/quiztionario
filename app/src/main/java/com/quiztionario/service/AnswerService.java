@@ -6,6 +6,7 @@ import android.content.Context;
 import com.quiztionario.dao.AnswerDAO;
 import com.quiztionario.model.Answer;
 import com.quiztionario.model.AnswerQuestion;
+import com.quiztionario.model.User;
 import com.quiztionario.model.ValidationException;
 import com.quiztionario.model.WithContext;
 
@@ -32,6 +33,13 @@ public class AnswerService extends WithContext {
 		}
 
 		return AnswerDAO.getInstance(context).create(answer);
+	}
+
+	public long countByUser(User user) throws ValidationException {
+		if (user == null)
+			throw new ValidationException("Invalid user");
+
+		return AnswerDAO.getInstance(context).countByUser(user);
 	}
 
 	public static AnswerService getInstance(Context context) {

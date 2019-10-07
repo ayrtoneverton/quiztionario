@@ -2,12 +2,10 @@ package com.quiztionario.service;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.widget.Toast;
 
 import com.quiztionario.dao.QuizDAO;
 import com.quiztionario.model.Question;
 import com.quiztionario.model.Quiz;
-import com.quiztionario.model.User;
 import com.quiztionario.model.ValidationException;
 import com.quiztionario.model.WithContext;
 
@@ -52,33 +50,28 @@ public class QuizService extends WithContext {
 		}
 	}
 
-	public static QuizService getInstance(Context context) {
-		if(service == null)
-			service = new QuizService(context);
-		return service;
-	}
-
-	public Quiz searchCode(String code) throws ValidationException {
+	public Quiz findByCode(String code) throws ValidationException {
 		if (code == null || code.trim().isEmpty())
 			throw new ValidationException("Quiz code is required");
+		try {
+			Integer.parseInt(code);
+		} catch (Exception e) {
+			throw new ValidationException("Quiz code must be a number");
+		}
 
 		return QuizDAO.getInstance(context).findByCode(code);
 	}
 
-	public ArrayList<Quiz> searchText(String text) throws ValidationException {
-		if(text.trim().isEmpty())
-			throw new ValidationException("You need a Text to search.");
+	public ArrayList<Quiz> findAllByName(String text) throws ValidationException {
+		if(text == null || text.trim().isEmpty())
+			throw new ValidationException("You need a Text to search");
 
-		return QuizDAO.getInstance(context).findAllByText(text);
+		return QuizDAO.getInstance(context).findAllByName(text);
 	}
 
-	public Integer attemptedQuiz(User user) throws ValidationException {
-		if (user == null){
-			throw new ValidationException("Invalid user");
-
-		}else {
-			return QuizDAO.getInstance(context).findAttempted(user);
-		}
-
+	public static QuizService getInstance(Context context) {
+		if(service == null)
+			service = new QuizService(context);
+		return service;
 	}
 }

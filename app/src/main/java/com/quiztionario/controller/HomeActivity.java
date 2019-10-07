@@ -44,8 +44,8 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
 			case R.id.item_menu_search:
 				startActivity(new Intent(this, SearchActivity.class).putExtra("user", user));
 				return true;
-			case R.id.item_menu_relatory:
-				startActivity(new Intent(this, ResultActivity.class).putExtra("user", user));
+			case R.id.item_menu_my_report:
+				startActivity(new Intent(this, MyReportActivity.class).putExtra("user", user));
 				return true;
 		}
 		return super.onOptionsItemSelected(item);

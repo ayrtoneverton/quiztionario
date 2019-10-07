@@ -6,6 +6,7 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical"
 	tools:context=".controller.SearchActivity"
+	tools:ignore="HardcodedText,Autofill,RtlHardcoded"
 	android:padding="20sp">
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -37,6 +38,9 @@
 		android:id="@+id/search_text"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:inputType="text"
+		android:singleLine="true"
+		android:imeOptions="actionNext"
 		android:hint="Text For Search"/>
 	<Button
 		android:layout_width="match_parent"

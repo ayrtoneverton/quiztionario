@@ -2,14 +2,16 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardcodedText"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <item
-        android:id="@+id/item_menu_search"
-        android:icon="@android:drawable/ic_menu_search"
-        android:title="Search Quiz"
-        app:showAsAction = "ifRoom"/>
+        android:id="@+id/item_menu_my_report"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="My Report"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/item_menu_add"
@@ -18,23 +20,8 @@
         app:showAsAction = "ifRoom"/>
 
     <item
-        android:id="@+id/item_menu_relatory"
-        android:icon="@android:drawable/ic_menu_info_details"
-        android:title="Relatory"
-        app:showAsAction="ifRoom" />
-    <!--
-    <item
-        android:id="@+id/item_2"
-        android:title="item 2"
-        app:showAsAction = "never">
-        <menu>
-            <item
-                android:id="@+id/sub_item1"
-                android:title="Sub Item 3"/>
-            <item
-                android:id="@+id/sub_item2"
-                android:title="Sub Item 2"/>
-        </menu>
-    </item>
-    -->
+        android:id="@+id/item_menu_search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="Search Quiz"
+        app:showAsAction = "ifRoom"/>
 </menu>
