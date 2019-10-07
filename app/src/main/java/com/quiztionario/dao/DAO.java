@@ -39,14 +39,14 @@ public class DAO extends SQLiteOpenHelper {
 	// Table Question
 	static final String QUESTION_TABLE = "question";
 	static final String QUESTION_ID = "id_question";
-	static final String QUESTION_TEXT = "text";
+	static final String QUESTION_TEXT = "question_text";
 	static final String QUESTION_QUIZ = "question_id_quiz";
 	static final String QUESTION_OPTION = "question_id_option";
 
 	// Table Option
 	static final String OPTION_TABLE = "option";
 	static final String OPTION_ID = "id_option";
-	static final String OPTION_TEXT = "text";
+	static final String OPTION_TEXT = "question_text";
 	static final String OPTION_QUESTION = "option_id_question";
 
 	// Table Answer

@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.quiztionario.model.Category;
+import com.quiztionario.model.Option;
+import com.quiztionario.model.Question;
 import com.quiztionario.model.Quiz;
 import com.quiztionario.model.User;
 
@@ -62,22 +64,29 @@ public class QuizDAO extends WithDAO {
 
 	public Quiz findByCode(String code) {
 		SQLiteDatabase db = dao.getReadableDatabase();
-		Cursor c = db.query(QUIZ_TABLE, null,
-				QUIZ_CODE + " = ?",
-				new String[]{code},
-				null, null, null);
+		String sql = "SELECT * FROM "+ QUIZ_TABLE +","+ QUESTION_TABLE +","+ OPTION_TABLE +" WHERE "
+				+ QUIZ_ID +"="+ QUESTION_QUIZ +" and "+ QUESTION_ID +"="+ OPTION_QUESTION +" and "+ QUIZ_CODE +"= ?";
+		Cursor c = db.rawQuery(sql, new String[]{code});
 
 		Quiz result = null;
+		Question lastQuestion = new Question();
 		while (c.moveToNext()) {
-			result = new Quiz(
-					c.getLong(c.getColumnIndex(QUIZ_ID)),
-					c.getString(c.getColumnIndex(QUIZ_NAME)),
-					c.getInt(c.getColumnIndex(QUIZ_OPEN)) == 1,
-					c.getInt(c.getColumnIndex(QUIZ_CODE)),
-					getDate(c.getString(c.getColumnIndex(QUIZ_START))),
-					getDate(c.getString(c.getColumnIndex(QUIZ_END))),
-					new Category(c.getLong(c.getColumnIndex(QUIZ_CATEGORY))),
-					new User(c.getLong(c.getColumnIndex(QUIZ_USER))));
+			if (result == null) {
+				result = new Quiz(
+						c.getLong(c.getColumnIndex(QUIZ_ID)),
+						c.getString(c.getColumnIndex(QUIZ_NAME)),
+						c.getInt(c.getColumnIndex(QUIZ_OPEN)) == 1,
+						c.getInt(c.getColumnIndex(QUIZ_CODE)),
+						getDate(c.getString(c.getColumnIndex(QUIZ_START))),
+						getDate(c.getString(c.getColumnIndex(QUIZ_END))),
+						new Category(c.getLong(c.getColumnIndex(QUIZ_CATEGORY))),
+						new User(c.getLong(c.getColumnIndex(QUIZ_USER))));
+			}
+			if (lastQuestion.getId() != c.getLong(c.getColumnIndex(QUESTION_ID))) {
+				lastQuestion = new Question(c.getLong(c.getColumnIndex(QUESTION_ID)), c.getString(c.getColumnIndex(QUESTION_TEXT)));
+				result.getQuestions().add(lastQuestion);
+			}
+			lastQuestion.getOptions().add(new Option(c.getLong(c.getColumnIndex(OPTION_ID)), c.getString(c.getColumnIndex(QUESTION_TEXT))));
 		}
 		c.close();
 		return result;

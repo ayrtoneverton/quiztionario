@@ -17,6 +17,12 @@ public class Question implements Serializable {
 		this.options = new ArrayList<>();
 	}
 
+	public Question(long id, String text) {
+		this.id = id;
+		this.text = text;
+		this.options = new ArrayList<>();
+	}
+
 	public String getText() {
 		return text;
 	}

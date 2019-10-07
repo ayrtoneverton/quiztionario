@@ -14,7 +14,12 @@ public class Option implements Serializable {
         this.question = question;
     }
 
-	public long getId() {
+    public Option(long id, String text) {
+        this.id = id;
+        this.text = text;
+    }
+
+    public long getId() {
         return id;
     }
     public void setId(long id) {
