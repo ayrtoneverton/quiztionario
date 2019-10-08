@@ -11,6 +11,8 @@ import com.quiztionario.model.User;
 import com.quiztionario.model.ValidationException;
 import com.quiztionario.model.WithContext;
 
+import java.util.List;
+
 public class AnswerService extends WithContext {
 	@SuppressLint("StaticFieldLeak")
 	private static AnswerService service;
@@ -48,6 +50,13 @@ public class AnswerService extends WithContext {
 			throw new ValidationException("Invalid quiz");
 
 		return AnswerDAO.getInstance(context).countByQuiz(quiz);
+	}
+
+	public List<User> findUsersWinnersByQuiz(Quiz quiz) throws ValidationException {
+		if (quiz == null)
+			throw new ValidationException("Invalid quiz");
+
+		return AnswerDAO.getInstance(context).findUsersWinnersByQuiz(quiz);
 	}
 
 	public static AnswerService getInstance(Context context) {

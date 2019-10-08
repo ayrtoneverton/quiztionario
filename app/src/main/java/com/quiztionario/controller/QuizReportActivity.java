@@ -1,6 +1,8 @@
 package com.quiztionario.controller;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +23,9 @@ public class QuizReportActivity extends AppCompatActivity {
 		try {
 			((TextView) findViewById(R.id.quiz_report_quantity_answers)).setText(String.valueOf(
 					AnswerService.getInstance(this).countByQuiz(quiz)));
+			((ListView) findViewById(R.id.quiz_report_winners))
+					.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
+							AnswerService.getInstance(this).findUsersWinnersByQuiz(quiz)));
 		} catch (ValidationException e) {
 			e.printStackTrace();
 		}
