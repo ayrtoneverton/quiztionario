@@ -67,6 +67,7 @@ public class CreateQuestionsAdapter extends BaseAdapter implements View.OnClickL
 
 	void showDialog(final Question question) {
 		final EditText input = new EditText(inflater.getContext());
+		input.setSingleLine(true);
 		new AlertDialog.Builder(inflater.getContext())
 				.setTitle("New " + (question == null ? "Question" : "Option"))
 				.setView(input)
@@ -82,7 +83,6 @@ public class CreateQuestionsAdapter extends BaseAdapter implements View.OnClickL
 							question.getOptions().add(new Option(text, question));
 							Toast.makeText(inflater.getContext(), "Option added", Toast.LENGTH_LONG).show();
 						}
-						notifyDataSetChanged();
 					}
 				})
 				.show();

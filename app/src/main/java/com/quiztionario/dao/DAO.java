@@ -16,19 +16,19 @@ public class DAO extends SQLiteOpenHelper {
 	// Table User
 	static final String USER_TABLE = "user";
 	static final String USER_ID = "id_user";
-	static final String USER_NAME = "name";
+	static final String USER_NAME = "user_name";
 	static final String USER_EMAIL = "email";
 	static final String USER_PASSWORD = "password";
 
 	// Table Category
 	static final String CATEGORY_TABLE = "category";
 	static final String CATEGORY_ID = "id_category";
-	static final String CATEGORY_NAME = "name";
+	static final String CATEGORY_NAME = "category_name";
 
 	// Table Quiz
 	static final String QUIZ_TABLE = "quiz";
 	static final String QUIZ_ID = "id_quiz";
-	static final String QUIZ_NAME = "name";
+	static final String QUIZ_NAME = "quiz_name";
 	static final String QUIZ_OPEN = "open";
 	static final String QUIZ_CODE = "code";
 	static final String QUIZ_START = "start_date";
@@ -46,7 +46,7 @@ public class DAO extends SQLiteOpenHelper {
 	// Table Option
 	static final String OPTION_TABLE = "option";
 	static final String OPTION_ID = "id_option";
-	static final String OPTION_TEXT = "question_text";
+	static final String OPTION_TEXT = "option_text";
 	static final String OPTION_QUESTION = "option_id_question";
 
 	// Table Answer

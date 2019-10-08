@@ -85,7 +85,7 @@ public class QuizDAO extends WithDAO {
 				lastQuestion = new Question(c.getLong(c.getColumnIndex(QUESTION_ID)), c.getString(c.getColumnIndex(QUESTION_TEXT)));
 				result.getQuestions().add(lastQuestion);
 			}
-			lastQuestion.getOptions().add(new Option(c.getLong(c.getColumnIndex(OPTION_ID)), c.getString(c.getColumnIndex(QUESTION_TEXT))));
+			lastQuestion.getOptions().add(new Option(c.getLong(c.getColumnIndex(OPTION_ID)), c.getString(c.getColumnIndex(OPTION_TEXT))));
 		}
 		c.close();
 		return result;
@@ -118,7 +118,7 @@ public class QuizDAO extends WithDAO {
 				lastQuestion = new Question(c.getLong(c.getColumnIndex(QUESTION_ID)), c.getString(c.getColumnIndex(QUESTION_TEXT)));
 				lastQuiz.getQuestions().add(lastQuestion);
 			}
-			lastQuestion.getOptions().add(new Option(c.getLong(c.getColumnIndex(OPTION_ID)), c.getString(c.getColumnIndex(QUESTION_TEXT))));
+			lastQuestion.getOptions().add(new Option(c.getLong(c.getColumnIndex(OPTION_ID)), c.getString(c.getColumnIndex(OPTION_TEXT))));
 		}
 		c.close();
 		return result;

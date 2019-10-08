@@ -37,6 +37,7 @@
 			android:id="@+id/quiz_category"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:singleLine="true"
 			android:hint="Category"
 			android:layout_marginBottom="25sp" />
 
