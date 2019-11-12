@@ -4,10 +4,8 @@ import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 
-public class Option implements Serializable {
-	private long id;
+public class Option extends Answer implements Serializable {
 	private String text;
-	private Question question;
 
 	public Option(String text, Question question) {
 		this.text = text;
@@ -19,28 +17,12 @@ public class Option implements Serializable {
 		this.text = text;
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	public String getText() {
 		return text;
 	}
 
 	public void setText(String text) {
 		this.text = text;
-	}
-
-	public Question getQuestion() {
-		return question;
-	}
-
-	public void setQuestion(Question question) {
-		this.question = question;
 	}
 
 	@NonNull

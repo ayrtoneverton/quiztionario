@@ -6,8 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.quiztionario.model.Category;
+import com.quiztionario.model.ObjectiveQuestion;
 import com.quiztionario.model.Option;
-import com.quiztionario.model.Question;
 import com.quiztionario.model.Quiz;
 import com.quiztionario.model.User;
 
@@ -68,7 +68,7 @@ public class QuizDAO extends WithDAO {
 		Cursor c = db.rawQuery(sql, new String[]{code});
 
 		Quiz result = null;
-		Question lastQuestion = new Question();
+		ObjectiveQuestion lastQuestion = new ObjectiveQuestion();
 		while (c.moveToNext()) {
 			if (result == null) {
 				result = new Quiz(
@@ -82,7 +82,10 @@ public class QuizDAO extends WithDAO {
 						new User(c.getLong(c.getColumnIndex(QUIZ_USER))));
 			}
 			if (lastQuestion.getId() != c.getLong(c.getColumnIndex(QUESTION_ID))) {
-				lastQuestion = new Question(c.getLong(c.getColumnIndex(QUESTION_ID)), c.getString(c.getColumnIndex(QUESTION_TEXT)));
+				lastQuestion = new ObjectiveQuestion(
+						c.getLong(c.getColumnIndex(QUESTION_ID)),
+						c.getString(c.getColumnIndex(QUESTION_TEXT)),
+						new Option(c.getLong(c.getColumnIndex(QUESTION_OPTION)), null));
 				result.getQuestions().add(lastQuestion);
 			}
 			lastQuestion.getOptions().add(new Option(c.getLong(c.getColumnIndex(OPTION_ID)), c.getString(c.getColumnIndex(OPTION_TEXT))));
@@ -100,7 +103,7 @@ public class QuizDAO extends WithDAO {
 
 		ArrayList<Quiz> result = new ArrayList<>();
 		Quiz lastQuiz = new Quiz();
-		Question lastQuestion = new Question();
+		ObjectiveQuestion lastQuestion = new ObjectiveQuestion();
 		while (c.moveToNext()) {
 			if (lastQuiz.getId() != c.getLong(c.getColumnIndex(QUIZ_ID))) {
 				lastQuiz = new Quiz(
@@ -115,7 +118,10 @@ public class QuizDAO extends WithDAO {
 				result.add(lastQuiz);
 			}
 			if (lastQuestion.getId() != c.getLong(c.getColumnIndex(QUESTION_ID))) {
-				lastQuestion = new Question(c.getLong(c.getColumnIndex(QUESTION_ID)), c.getString(c.getColumnIndex(QUESTION_TEXT)));
+				lastQuestion = new ObjectiveQuestion(
+						c.getLong(c.getColumnIndex(QUESTION_ID)),
+						c.getString(c.getColumnIndex(QUESTION_TEXT)),
+						new Option(c.getLong(c.getColumnIndex(QUESTION_OPTION)), null));
 				lastQuiz.getQuestions().add(lastQuestion);
 			}
 			lastQuestion.getOptions().add(new Option(c.getLong(c.getColumnIndex(OPTION_ID)), c.getString(c.getColumnIndex(OPTION_TEXT))));

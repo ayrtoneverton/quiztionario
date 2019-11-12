@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 
 import com.quiztionario.R;
+import com.quiztionario.model.ObjectiveQuestion;
 import com.quiztionario.model.Option;
 import com.quiztionario.model.Question;
 
@@ -47,7 +48,7 @@ public class CreateQuestionsAdapter extends BaseAdapter implements View.OnClickL
 		optionsView.setAdapter(new ArrayAdapter<>(
 				inflater.getContext(),
 				android.R.layout.simple_list_item_single_choice,
-				questions.get(i).getOptions()));
+				((ObjectiveQuestion) questions.get(i)).getOptions()));
 		optionsView.setOnItemClickListener(this);
 		return v;
 	}
@@ -77,10 +78,10 @@ public class CreateQuestionsAdapter extends BaseAdapter implements View.OnClickL
 						if (text.isEmpty())
 							return;
 						if (question == null) {
-							questions.add(new Question(text));
+							questions.add(new ObjectiveQuestion(text));
 							Toast.makeText(inflater.getContext(), "Question added", Toast.LENGTH_LONG).show();
 						} else {
-							question.getOptions().add(new Option(text, question));
+							((ObjectiveQuestion) question).getOptions().add(new Option(text, question));
 							Toast.makeText(inflater.getContext(), "Option added", Toast.LENGTH_LONG).show();
 						}
 					}

@@ -16,7 +16,7 @@ public class Quiz implements Serializable {
 	private GregorianCalendar end;
 	private Category category;
 	private User creator;
-	private List<Answer> answers;
+	private List<QuizAnswer> quizAnswers;
 	private List<Question> questions;
 
 	public Quiz() {
@@ -98,12 +98,12 @@ public class Quiz implements Serializable {
 		this.creator = creator;
 	}
 
-	public List<Answer> getAnswers() {
-		return answers;
+	public List<QuizAnswer> getQuizAnswers() {
+		return quizAnswers;
 	}
 
-	public void setAnswers(List<Answer> answers) {
-		this.answers = answers;
+	public void setQuizAnswers(List<QuizAnswer> quizAnswers) {
+		this.quizAnswers = quizAnswers;
 	}
 
 	public List<Question> getQuestions() {

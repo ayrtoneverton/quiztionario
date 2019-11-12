@@ -49,18 +49,20 @@ public class DAO extends SQLiteOpenHelper {
 	static final String OPTION_TEXT = "option_text";
 	static final String OPTION_QUESTION = "option_id_question";
 
-	// Table Answer
+	// Table QuizAnswer
 	static final String ANSWER_TABLE = "answer";
 	static final String ANSWER_ID = "id_answer";
 	static final String ANSWER_QUIZ = "answer_id_quiz";
 	static final String ANSWER_CREATOR = "answer_id_user";
+	static final String ANSWER_SCORE = "answer_score";
 
-	// Table AnswerQuestion
+	// Table QuestionAnswer
 	static final String ANSWER_QUESTION_TABLE = "answer_question";
 	static final String ANSWER_QUESTION_ID = "id_answer_question";
 	static final String ANSWER_QUESTION_ANSWER = "answer_question_id_answer";
 	static final String ANSWER_QUESTION_QUESTION = "answer_question_id_question";
 	static final String ANSWER_QUESTION_OPTION = "answer_question_id_option";
+	static final String ANSWER_QUESTION_SCORE = "answer_question_score";
 
 	private DAO(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -113,14 +115,16 @@ public class DAO extends SQLiteOpenHelper {
 		db.execSQL("CREATE TABLE " + ANSWER_TABLE + "("
 				+ ANSWER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ ANSWER_QUIZ + " INTEGER,"
-				+ ANSWER_CREATOR + " INTEGER"
+				+ ANSWER_CREATOR + " INTEGER,"
+				+ ANSWER_SCORE + " INTEGER"
 				+ ")");
 
 		db.execSQL("CREATE TABLE " + ANSWER_QUESTION_TABLE + "("
 				+ ANSWER_QUESTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ ANSWER_QUESTION_ANSWER + " INTEGER,"
 				+ ANSWER_QUESTION_QUESTION + " INTEGER,"
-				+ ANSWER_QUESTION_OPTION + " INTEGER"
+				+ ANSWER_QUESTION_OPTION + " INTEGER,"
+				+ ANSWER_QUESTION_SCORE + " INTEGER"
 				+ ")");
 	}
 

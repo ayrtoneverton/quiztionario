@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.quiztionario.dao.QuestionDAO;
-import com.quiztionario.model.Option;
 import com.quiztionario.model.Question;
 import com.quiztionario.model.ValidationException;
 import com.quiztionario.model.WithContext;
@@ -22,14 +21,8 @@ public class QuestionService extends WithContext {
 			throw new ValidationException("Question Text is required");
 		if (question.getQuiz() == null)
 			throw new ValidationException("Question Quiz is required");
-		if (question.getOptions().size() < 2)
-			throw new ValidationException("At least two Options are required for each Question");
-		for (Option op : question.getOptions()) {
-			if (op.getText() == null || op.getText().trim().isEmpty())
-				throw new ValidationException("Option Text is required");
-		}
-		if (question.getCorrect() == null)
-			throw new ValidationException("You must select the Correct option for each Question");
+
+		question.validate();
 
 		return QuestionDAO.getInstance(context).create(question);
 	}

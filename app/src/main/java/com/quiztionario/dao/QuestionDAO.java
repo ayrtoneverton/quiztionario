@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.quiztionario.model.ObjectiveQuestion;
 import com.quiztionario.model.Option;
 import com.quiztionario.model.Question;
 
@@ -24,7 +25,7 @@ public class QuestionDAO extends WithDAO {
 		values.put(QUESTION_QUIZ, question.getQuiz().getId());
 		question.setId(db.insert(QUESTION_TABLE, null, values));
 
-		for (Option op : question.getOptions()) {
+		for (Option op : ((ObjectiveQuestion) question).getOptions()) {
 			values.clear();
 			values.put(OPTION_TEXT, op.getText());
 			values.put(OPTION_QUESTION, question.getId());

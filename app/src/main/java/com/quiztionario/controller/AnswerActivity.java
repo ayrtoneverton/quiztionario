@@ -31,7 +31,7 @@ public class AnswerActivity extends AppCompatActivity {
 
 	public void save(View view) {
 		try {
-			AnswerService.getInstance(this).create(answerQuestionsAdapter.getAnswer());
+			AnswerService.getInstance(this).create(answerQuestionsAdapter.getQuizAnswer());
 			Toast.makeText(this, "Recorded Answer", Toast.LENGTH_LONG).show();
 			finish();
 		} catch (ValidationException e) {

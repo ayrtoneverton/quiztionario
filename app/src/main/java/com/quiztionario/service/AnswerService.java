@@ -4,9 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.quiztionario.dao.AnswerDAO;
-import com.quiztionario.model.Answer;
-import com.quiztionario.model.AnswerQuestion;
+import com.quiztionario.model.ObjectiveQuestionCalculator;
+import com.quiztionario.model.QuizAnswer;
 import com.quiztionario.model.Quiz;
+import com.quiztionario.model.SummationQuizCalculator;
 import com.quiztionario.model.User;
 import com.quiztionario.model.ValidationException;
 import com.quiztionario.model.WithContext;
@@ -21,21 +22,19 @@ public class AnswerService extends WithContext {
 		super(context);
 	}
 
-	public Answer create(Answer answer) throws ValidationException {
-		if (answer.getQuiz() == null)
-			throw new ValidationException("Quiz is required in Answer");
-		if (answer.getCreator() == null)
-			throw new ValidationException("Creator User is required in Answer");
-		if (answer.getAnswers().get(0).getAnswer() == null)
-			throw new ValidationException("Answer is required in AnswerQuestion");
-		if (answer.getAnswers().get(0).getQuestion() == null)
-			throw new ValidationException("Question is required in AnswerQuestion");
-		for (AnswerQuestion aq : answer.getAnswers()) {
-			if (aq.getOption() == null)
-				throw new ValidationException("Question " + (answer.getAnswers().indexOf(aq) + 1) + " needs to be answered.");
-		}
+	public QuizAnswer create(QuizAnswer quizAnswer) throws ValidationException {
+		if (quizAnswer.getQuiz() == null)
+			throw new ValidationException("Quiz is required in QuizAnswer");
+		if (quizAnswer.getCreator() == null)
+			throw new ValidationException("Creator User is required in QuizAnswer");
+		if (quizAnswer.getQuestionAnswers().get(0).getQuizAnswer() == null)
+			throw new ValidationException("QuizAnswer is required in QuestionAnswer");
+		if (quizAnswer.getQuestionAnswers().get(0).getQuestion() == null)
+			throw new ValidationException("Question is required in QuestionAnswer");
 
-		return AnswerDAO.getInstance(context).create(answer);
+		quizAnswer.calculateScore(new SummationQuizCalculator(), new ObjectiveQuestionCalculator());
+
+		return AnswerDAO.getInstance(context).create(quizAnswer);
 	}
 
 	public long countByUser(User user) throws ValidationException {

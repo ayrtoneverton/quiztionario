@@ -6,8 +6,8 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.quiztionario.model.Answer;
-import com.quiztionario.model.AnswerQuestion;
+import com.quiztionario.model.QuestionAnswer;
+import com.quiztionario.model.QuizAnswer;
 import com.quiztionario.model.Quiz;
 import com.quiztionario.model.User;
 
@@ -23,22 +23,24 @@ public class AnswerDAO extends WithDAO {
 		super(context);
 	}
 
-	public Answer create(Answer answer) {
+	public QuizAnswer create(QuizAnswer quizAnswer) {
 		SQLiteDatabase db = dao.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
-		values.put(ANSWER_QUIZ, answer.getQuiz().getId());
-		values.put(ANSWER_CREATOR, answer.getCreator().getId());
-		answer.setId(db.insert(ANSWER_TABLE, null, values));
+		values.put(ANSWER_QUIZ, quizAnswer.getQuiz().getId());
+		values.put(ANSWER_CREATOR, quizAnswer.getCreator().getId());
+		values.put(ANSWER_SCORE, quizAnswer.getScore());
+		quizAnswer.setId(db.insert(ANSWER_TABLE, null, values));
 
-		for (AnswerQuestion aq : answer.getAnswers()) {
+		for (QuestionAnswer aq : quizAnswer.getQuestionAnswers()) {
 			values.clear();
-			values.put(ANSWER_QUESTION_ANSWER, answer.getId());
+			values.put(ANSWER_QUESTION_ANSWER, quizAnswer.getId());
 			values.put(ANSWER_QUESTION_QUESTION, aq.getQuestion().getId());
-			values.put(ANSWER_QUESTION_OPTION, aq.getOption().getId());
+			values.put(ANSWER_QUESTION_OPTION, aq.getAnswer().getId());
+			values.put(ANSWER_QUESTION_SCORE, aq.getScore());
 			aq.setId(db.insert(ANSWER_QUESTION_TABLE, null, values));
 		}
-		return answer;
+		return quizAnswer;
 	}
 
 	public long countByUser(User user) {
