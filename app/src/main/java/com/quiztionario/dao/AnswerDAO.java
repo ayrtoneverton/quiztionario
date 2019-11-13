@@ -27,38 +27,38 @@ public class AnswerDAO extends WithDAO {
 		SQLiteDatabase db = dao.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
-		values.put(ANSWER_QUIZ, quizAnswer.getQuiz().getId());
-		values.put(ANSWER_CREATOR, quizAnswer.getCreator().getId());
-		values.put(ANSWER_SCORE, quizAnswer.getScore());
-		quizAnswer.setId(db.insert(ANSWER_TABLE, null, values));
+		values.put(QUIZ_ANSWER, quizAnswer.getQuiz().getId());
+		values.put(QUIZ_ANSWER_CREATOR, quizAnswer.getCreator().getId());
+		values.put(QUIZ_ANSWER_SCORE, quizAnswer.getScore());
+		quizAnswer.setId(db.insert(QUIZ_ANSWER_TABLE, null, values));
 
 		for (QuestionAnswer aq : quizAnswer.getQuestionAnswers()) {
 			values.clear();
-			values.put(ANSWER_QUESTION_ANSWER, quizAnswer.getId());
-			values.put(ANSWER_QUESTION_QUESTION, aq.getQuestion().getId());
-			values.put(ANSWER_QUESTION_OPTION, aq.getAnswer().getId());
-			values.put(ANSWER_QUESTION_SCORE, aq.getScore());
-			aq.setId(db.insert(ANSWER_QUESTION_TABLE, null, values));
+			values.put(QUESTION_ANSWER_ANSWER, quizAnswer.getId());
+			values.put(QUESTION_ANSWER_QUESTION, aq.getQuestion().getId());
+			values.put(QUESTION_ANSWER_OPTION, aq.getAnswer().getId());
+			values.put(QUESTION_ANSWER_SCORE, aq.getScore());
+			aq.setId(db.insert(QUESTION_ANSWER_TABLE, null, values));
 		}
 		return quizAnswer;
 	}
 
 	public long countByUser(User user) {
-		return DatabaseUtils.queryNumEntries(dao.getReadableDatabase(), ANSWER_TABLE, ANSWER_CREATOR + "=" + user.getId());
+		return DatabaseUtils.queryNumEntries(dao.getReadableDatabase(), QUIZ_ANSWER_TABLE, QUIZ_ANSWER_CREATOR + "=" + user.getId());
 	}
 
 	public long countByQuiz(Quiz quiz) {
-		return DatabaseUtils.queryNumEntries(dao.getReadableDatabase(), ANSWER_TABLE, ANSWER_QUIZ + "=" + quiz.getId());
+		return DatabaseUtils.queryNumEntries(dao.getReadableDatabase(), QUIZ_ANSWER_TABLE, QUIZ_ANSWER + "=" + quiz.getId());
 	}
 
 	public List<User> findUsersWinnersByQuiz(Quiz quiz) {
 		SQLiteDatabase db = dao.getReadableDatabase();
 		String sql = "SELECT DISTINCT " + USER_TABLE + ".* FROM "
-				+ ANSWER_TABLE + "," + USER_TABLE + " WHERE "
-				+ ANSWER_CREATOR + "=" + USER_ID + " AND " + ANSWER_QUIZ + "= ?"
-				+ " AND NOT EXISTS (SELECT * FROM " + ANSWER_QUESTION_TABLE + "," + QUESTION_TABLE + " WHERE "
-				+ ANSWER_QUESTION_QUESTION + "=" + QUESTION_ID + " AND " + ANSWER_ID + "=" + ANSWER_QUESTION_ANSWER
-				+ " AND " + ANSWER_QUESTION_OPTION + "!=" + QUESTION_OPTION + ")";
+				+ QUIZ_ANSWER_TABLE + "," + USER_TABLE + " WHERE "
+				+ QUIZ_ANSWER_CREATOR + "=" + USER_ID + " AND " + QUIZ_ANSWER + "= ?"
+				+ " AND NOT EXISTS (SELECT * FROM " + QUESTION_ANSWER_TABLE + "," + QUESTION_TABLE + " WHERE "
+				+ QUESTION_ANSWER_QUESTION + "=" + QUESTION_ID + " AND " + QUIZ_ANSWER_ID + "=" + QUESTION_ANSWER_ANSWER
+				+ " AND " + QUESTION_ANSWER_OPTION + "!=" + QUESTION_OPTION + ")";
 		Cursor c = db.rawQuery(sql, new String[]{String.valueOf(quiz.getId())});
 
 		List<User> result = new ArrayList<>();
