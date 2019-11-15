@@ -17,6 +17,14 @@ public class QuizAnswer implements Serializable {
 		this.questionAnswers = new ArrayList<>();
 	}
 
+	public QuizAnswer(long id, User creator,String userName, Integer score) {
+		this.id = id;
+		this.creator = creator;
+		this.creator.setName(userName);
+		this.score = score;
+		this.questionAnswers = new ArrayList<>();
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -62,5 +70,10 @@ public class QuizAnswer implements Serializable {
 			questionCalculator.calculate(questionAnswer);
 		}
 		quizCalculator.calculate(this);
+	}
+
+	@Override
+	public String toString() {
+		return creator.getName() + " (" + score + ")";
 	}
 }

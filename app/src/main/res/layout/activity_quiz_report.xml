@@ -35,7 +35,7 @@
 		android:layout_height="wrap_content"
 		android:padding="20sp"
 		android:textSize="16sp"
-		android:text="Winners:"/>
+		android:text="Answers Scores:"/>
 	<ListView
 		android:id="@+id/quiz_report_winners"
 		android:layout_width="match_parent"

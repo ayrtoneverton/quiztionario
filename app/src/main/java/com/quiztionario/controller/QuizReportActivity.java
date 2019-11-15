@@ -25,7 +25,7 @@ public class QuizReportActivity extends AppCompatActivity {
 					AnswerService.getInstance(this).countByQuiz(quiz)));
 			((ListView) findViewById(R.id.quiz_report_winners))
 					.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
-							AnswerService.getInstance(this).findUsersWinnersByQuiz(quiz)));
+							AnswerService.getInstance(this).findByQuiz(quiz)));
 		} catch (ValidationException e) {
 			e.printStackTrace();
 		}

@@ -51,22 +51,21 @@ public class AnswerDAO extends WithDAO {
 		return DatabaseUtils.queryNumEntries(dao.getReadableDatabase(), QUIZ_ANSWER_TABLE, QUIZ_ANSWER + "=" + quiz.getId());
 	}
 
-	public List<User> findUsersWinnersByQuiz(Quiz quiz) {
+	public List<QuizAnswer> findByQuiz(Quiz quiz) {
 		SQLiteDatabase db = dao.getReadableDatabase();
-		String sql = "SELECT DISTINCT " + USER_TABLE + ".* FROM "
+		String sql = "SELECT * FROM "
 				+ QUIZ_ANSWER_TABLE + "," + USER_TABLE + " WHERE "
-				+ QUIZ_ANSWER_CREATOR + "=" + USER_ID + " AND " + QUIZ_ANSWER + "= ?"
-				+ " AND NOT EXISTS (SELECT * FROM " + QUESTION_ANSWER_TABLE + "," + QUESTION_TABLE + " WHERE "
-				+ QUESTION_ANSWER_QUESTION + "=" + QUESTION_ID + " AND " + QUIZ_ANSWER_ID + "=" + QUESTION_ANSWER_ANSWER
-				+ " AND " + QUESTION_ANSWER_OPTION + "!=" + QUESTION_OPTION + ")";
+				+ QUIZ_ANSWER_CREATOR + "=" + USER_ID + " AND " + QUIZ_ANSWER + "= ?" +
+				"ORDER BY " + QUIZ_ANSWER_SCORE + " DESC";
 		Cursor c = db.rawQuery(sql, new String[]{String.valueOf(quiz.getId())});
 
-		List<User> result = new ArrayList<>();
+		List<QuizAnswer> result = new ArrayList<>();
 		while (c.moveToNext()) {
-			result.add(new User(
-					c.getLong(c.getColumnIndex(USER_ID)),
+			result.add(new QuizAnswer(
+					c.getLong(c.getColumnIndex(QUIZ_ANSWER_ID )),
+					new User(c.getLong(c.getColumnIndex(QUIZ_ANSWER_CREATOR))),
 					c.getString(c.getColumnIndex(USER_NAME)),
-					c.getString(c.getColumnIndex(USER_EMAIL))));
+					c.getInt(c.getColumnIndex(QUIZ_ANSWER_SCORE))));
 		}
 		c.close();
 		return result;

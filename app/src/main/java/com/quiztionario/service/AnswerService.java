@@ -51,11 +51,11 @@ public class AnswerService extends WithContext {
 		return AnswerDAO.getInstance(context).countByQuiz(quiz);
 	}
 
-	public List<User> findUsersWinnersByQuiz(Quiz quiz) throws ValidationException {
+	public List<QuizAnswer> findByQuiz(Quiz quiz) throws ValidationException {
 		if (quiz == null)
 			throw new ValidationException("Invalid quiz");
 
-		return AnswerDAO.getInstance(context).findUsersWinnersByQuiz(quiz);
+		return AnswerDAO.getInstance(context).findByQuiz(quiz);
 	}
 
 	public static AnswerService getInstance(Context context) {
