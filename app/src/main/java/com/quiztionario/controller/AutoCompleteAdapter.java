@@ -10,7 +10,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
-import com.quiztionario.model.Category;
+import com.quizwork.Category;
 import com.quiztionario.service.CategoryService;
 
 import java.util.ArrayList;

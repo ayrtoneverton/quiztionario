@@ -1,5 +1,9 @@
 package com.quiztionario.model;
 
+import com.quizwork.Answer;
+import com.quizwork.Question;
+import com.quizwork.ValidationException;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 

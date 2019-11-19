@@ -6,10 +6,10 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.quiztionario.model.QuestionAnswer;
-import com.quiztionario.model.QuizAnswer;
-import com.quiztionario.model.Quiz;
-import com.quiztionario.model.User;
+import com.quizwork.QuestionAnswer;
+import com.quizwork.QuizAnswer;
+import com.quizwork.Quiz;
+import com.quizwork.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,16 +55,18 @@ public class AnswerDAO extends WithDAO {
 		SQLiteDatabase db = dao.getReadableDatabase();
 		String sql = "SELECT * FROM "
 				+ QUIZ_ANSWER_TABLE + "," + USER_TABLE + " WHERE "
-				+ QUIZ_ANSWER_CREATOR + "=" + USER_ID + " AND " + QUIZ_ANSWER + "= ?" +
-				"ORDER BY " + QUIZ_ANSWER_SCORE + " DESC";
+				+ QUIZ_ANSWER_CREATOR + "=" + USER_ID + " AND " + QUIZ_ANSWER + "= ?"
+				+ " ORDER BY " + QUIZ_ANSWER_SCORE + " DESC";
 		Cursor c = db.rawQuery(sql, new String[]{String.valueOf(quiz.getId())});
 
 		List<QuizAnswer> result = new ArrayList<>();
 		while (c.moveToNext()) {
 			result.add(new QuizAnswer(
 					c.getLong(c.getColumnIndex(QUIZ_ANSWER_ID )),
-					new User(c.getLong(c.getColumnIndex(QUIZ_ANSWER_CREATOR))),
-					c.getString(c.getColumnIndex(USER_NAME)),
+					new User(
+							c.getLong(c.getColumnIndex(USER_ID)),
+							c.getString(c.getColumnIndex(USER_NAME)),
+							null),
 					c.getInt(c.getColumnIndex(QUIZ_ANSWER_SCORE))));
 		}
 		c.close();

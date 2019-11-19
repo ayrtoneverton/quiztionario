@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.quiztionario.model.ObjectiveQuestion;
 import com.quiztionario.model.Option;
-import com.quiztionario.model.Question;
+import com.quizwork.Question;
 
 import static com.quiztionario.dao.DAO.*;
 

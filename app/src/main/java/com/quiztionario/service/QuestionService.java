@@ -4,8 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.quiztionario.dao.QuestionDAO;
-import com.quiztionario.model.Question;
-import com.quiztionario.model.ValidationException;
+import com.quizwork.Question;
+import com.quizwork.ValidationException;
 import com.quiztionario.model.WithContext;
 
 public class QuestionService extends WithContext {

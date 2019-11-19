@@ -4,8 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.quiztionario.dao.CategoryDAO;
-import com.quiztionario.model.Category;
-import com.quiztionario.model.ValidationException;
+import com.quizwork.Category;
+import com.quizwork.ValidationException;
 import com.quiztionario.model.WithContext;
 
 import java.util.List;

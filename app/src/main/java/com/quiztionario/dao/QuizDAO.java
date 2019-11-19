@@ -5,11 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.quiztionario.model.Category;
+import com.quizwork.Category;
 import com.quiztionario.model.ObjectiveQuestion;
 import com.quiztionario.model.Option;
-import com.quiztionario.model.Quiz;
-import com.quiztionario.model.User;
+import com.quizwork.Quiz;
+import com.quizwork.User;
 
 import java.util.ArrayList;
 import java.util.List;

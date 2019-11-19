@@ -12,12 +12,12 @@ import android.widget.TextView;
 
 import com.quiztionario.R;
 import com.quiztionario.model.ObjectiveQuestion;
-import com.quiztionario.model.QuizAnswer;
-import com.quiztionario.model.QuestionAnswer;
+import com.quizwork.QuizAnswer;
+import com.quizwork.QuestionAnswer;
 import com.quiztionario.model.Option;
-import com.quiztionario.model.Question;
-import com.quiztionario.model.Quiz;
-import com.quiztionario.model.User;
+import com.quizwork.Question;
+import com.quizwork.Quiz;
+import com.quizwork.User;
 
 public class AnswerQuestionsAdapter extends BaseAdapter implements View.OnClickListener {
 	private QuizAnswer quizAnswer;

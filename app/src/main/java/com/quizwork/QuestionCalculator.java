@@ -1,4 +1,4 @@
-package com.quiztionario.model;
+package com.quizwork;
 
 public interface QuestionCalculator {
 	void calculate(QuestionAnswer questionAnswer) throws ValidationException;

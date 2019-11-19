@@ -10,8 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.quiztionario.R;
-import com.quiztionario.model.User;
-import com.quiztionario.model.ValidationException;
+import com.quizwork.User;
+import com.quizwork.ValidationException;
 import com.quiztionario.service.UserService;
 
 public class LoginActivity extends AppCompatActivity {

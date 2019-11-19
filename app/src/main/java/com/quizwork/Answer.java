@@ -1,4 +1,4 @@
-package com.quiztionario.model;
+package com.quizwork;
 
 import java.io.Serializable;
 

@@ -20,7 +20,7 @@ import androidx.appcompat.app.AlertDialog;
 import com.quiztionario.R;
 import com.quiztionario.model.ObjectiveQuestion;
 import com.quiztionario.model.Option;
-import com.quiztionario.model.Question;
+import com.quizwork.Question;
 
 import java.util.ArrayList;
 import java.util.List;

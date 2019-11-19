@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.quiztionario.model.Category;
+import com.quizwork.Category;
 
 import java.util.ArrayList;
 import java.util.List;

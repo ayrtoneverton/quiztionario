@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.quiztionario.model.User;
+import com.quizwork.User;
 
 import static com.quiztionario.dao.DAO.*;
 

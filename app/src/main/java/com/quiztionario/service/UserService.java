@@ -4,8 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.quiztionario.dao.UserDAO;
-import com.quiztionario.model.User;
-import com.quiztionario.model.ValidationException;
+import com.quizwork.User;
+import com.quizwork.ValidationException;
 import com.quiztionario.model.WithContext;
 
 public class UserService extends WithContext {

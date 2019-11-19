@@ -2,6 +2,9 @@ package com.quiztionario.model;
 
 import androidx.annotation.NonNull;
 
+import com.quizwork.Answer;
+import com.quizwork.Question;
+
 import java.io.Serializable;
 
 public class Option extends Answer implements Serializable {

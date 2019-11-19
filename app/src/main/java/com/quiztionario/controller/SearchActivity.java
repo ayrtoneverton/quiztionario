@@ -12,9 +12,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.quiztionario.R;
-import com.quiztionario.model.Quiz;
-import com.quiztionario.model.User;
-import com.quiztionario.model.ValidationException;
+import com.quizwork.Quiz;
+import com.quizwork.User;
+import com.quizwork.ValidationException;
 import com.quiztionario.service.QuizService;
 
 public class SearchActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {

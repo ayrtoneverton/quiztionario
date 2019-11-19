@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.quiztionario.R;
-import com.quiztionario.model.Quiz;
+import com.quizwork.Quiz;
 
 import java.util.List;
 

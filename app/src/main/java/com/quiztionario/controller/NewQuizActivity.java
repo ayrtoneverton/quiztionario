@@ -19,10 +19,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.quiztionario.R;
-import com.quiztionario.model.Category;
-import com.quiztionario.model.Quiz;
-import com.quiztionario.model.User;
-import com.quiztionario.model.ValidationException;
+import com.quizwork.Category;
+import com.quizwork.Quiz;
+import com.quizwork.User;
+import com.quizwork.ValidationException;
 import com.quiztionario.service.QuizService;
 
 import java.util.Calendar;

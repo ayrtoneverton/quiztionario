@@ -1,4 +1,4 @@
-package com.quiztionario.model;
+package com.quizwork;
 
 public class QuestionAnswer {
 	private long id;

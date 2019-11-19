@@ -1,4 +1,4 @@
-package com.quiztionario.model;
+package com.quizwork;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,10 +17,9 @@ public class QuizAnswer implements Serializable {
 		this.questionAnswers = new ArrayList<>();
 	}
 
-	public QuizAnswer(long id, User creator,String userName, Integer score) {
+	public QuizAnswer(long id, User creator, Integer score) {
 		this.id = id;
 		this.creator = creator;
-		this.creator.setName(userName);
 		this.score = score;
 		this.questionAnswers = new ArrayList<>();
 	}

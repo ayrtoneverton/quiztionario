@@ -5,11 +5,11 @@ import android.content.Context;
 
 import com.quiztionario.dao.AnswerDAO;
 import com.quiztionario.model.ObjectiveQuestionCalculator;
-import com.quiztionario.model.QuizAnswer;
-import com.quiztionario.model.Quiz;
+import com.quizwork.QuizAnswer;
+import com.quizwork.Quiz;
 import com.quiztionario.model.SummationQuizCalculator;
-import com.quiztionario.model.User;
-import com.quiztionario.model.ValidationException;
+import com.quizwork.User;
+import com.quizwork.ValidationException;
 import com.quiztionario.model.WithContext;
 
 import java.util.List;

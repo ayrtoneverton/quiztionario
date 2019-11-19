@@ -1,5 +1,9 @@
 package com.quiztionario.model;
 
+import com.quizwork.QuestionAnswer;
+import com.quizwork.QuestionCalculator;
+import com.quizwork.ValidationException;
+
 public class ObjectiveQuestionCalculator implements QuestionCalculator {
 	@Override
 	public void calculate(QuestionAnswer questionAnswer) throws ValidationException {
